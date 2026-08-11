@@ -5,6 +5,10 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+try:
+    import ctypes
+except Exception:
+    ctypes = None
 
 from PyQt5.QtCore import Qt, QThread, QObject, pyqtSignal, pyqtSlot
 from PyQt5.QtGui import QFont, QFontDatabase, QIcon
@@ -31,6 +35,7 @@ from PyQt5.QtWidgets import (
 BASE_DIR = Path(__file__).resolve().parent  # 项目根目录
 FONTS_DIR = BASE_DIR / "fonts"  # 字体目录
 ASSETS_DIR = BASE_DIR / "assets"  # 资源目录
+DEFAULT_WINDOW_ICON = ASSETS_DIR / "package.ico"
 OUTPUT_PATH = BASE_DIR / "output"  # 输出目录
 LOG_FILE = ASSETS_DIR / "package_tool.log"  # 日志文件路径
 WINDOW_WIDTH = 1280  # 窗口宽度
@@ -153,8 +158,9 @@ def build_pyinstaller_command(entry_scripts, project_name, output_dir, icon_path
     else:
         command.append("--onedir")
     command.extend(["--name", project_name])
-    if icon_path and Path(icon_path).exists():
-        command.extend(["--icon", str(icon_path)])
+    trusted_icon = Path(icon_path) if icon_path else DEFAULT_WINDOW_ICON
+    if trusted_icon and trusted_icon.exists():
+        command.extend(["--icon", str(trusted_icon)])
     if resources_path and Path(resources_path).exists():
         command.extend(["--add-data", f"{resources_path}{os.pathsep}resources"])
     command.extend([str(script) for script in entry_scripts])
@@ -285,9 +291,8 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Python 项目打包助手")
-        icon_path = ASSETS_DIR / "package.ico"
-        if icon_path.exists():
-            self.setWindowIcon(QIcon(str(icon_path)))
+        if DEFAULT_WINDOW_ICON.exists():
+            self.setWindowIcon(QIcon(str(DEFAULT_WINDOW_ICON)))
         self.resize(WINDOW_WIDTH, WINDOW_HEIGHT)
         self.setFont(QFont(BODY_FONT_NAME, BODY_FONT_SIZE))
         self.project_dir = None
@@ -389,7 +394,7 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
         icon_btn.clicked.connect(self.select_icon_file)
         icon_btn.setFont(QFont(BUTTON_FONT_NAME, BUTTON_FONT_SIZE))
         icon_row.addWidget(icon_btn)
-        self.icon_path_label = QLabel("未选择图标")
+        self.icon_path_label = QLabel("未选择图标，将默认使用package.ico")
         self.icon_path_label.setWordWrap(True)
         self.icon_path_label.setFont(QFont(BODY_FONT_NAME, BODY_FONT_SIZE))
         icon_row.addWidget(self.icon_path_label, 1)
@@ -565,13 +570,19 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
             write_log("用户取消了图标选择", "INFO")
             return
         selected_icon = Path(icon_file)
-        if sys.platform.startswith("win") and selected_icon.suffix.lower() != ".ico":
-            QMessageBox.warning(self, "提示", "Windows 打包图标应为 .ico 文件，已取消此次图标选择。")
-            write_log(f"图标选择无效（非 .ico）：{selected_icon}", "WARNING")
-            return
         self.icon_path = selected_icon
         self.icon_path_label.setText(str(self.icon_path))
-        write_log(f"已选择图标文件: {self.icon_path}", "INFO")
+        if DEFAULT_WINDOW_ICON.exists():
+            self.setWindowIcon(QIcon(str(DEFAULT_WINDOW_ICON)))
+        if sys.platform.startswith("win") and self.icon_path.suffix.lower() != ".ico":
+            QMessageBox.information(
+                self,
+                "提示",
+                "窗口图标已使用 assets/package.ico，Windows 可执行文件图标仍需 .ico 文件。",
+            )
+            write_log(f"已选择图标文件: {self.icon_path}，窗口图标使用默认 package.ico。", "WARNING")
+        else:
+            write_log(f"已选择图标文件: {self.icon_path}", "INFO")
         self._append_log(format_log_message(f"已选择图标文件: {self.icon_path}", "INFO"))
 
     def select_resources_dir(self):  # 选择需要一起打包的资源目录
@@ -684,10 +695,31 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
 
 
 def main():  # 程序入口
+    # 在 Windows 上设置 AppUserModelID，可以帮助任务栏显示正确的图标
+    if sys.platform.startswith("win") and ctypes is not None:
+        try:
+            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("Cover0719.PackPython")
+        except Exception:
+            pass
     app = QApplication(sys.argv)
     app.setStyle("Fusion")
     load_font_families()
     app.setFont(QFont(BODY_FONT_NAME, BODY_FONT_SIZE))
+    # 优先在已打包（frozen）环境下使用 exe 自身图标，保证任务栏/窗口显示一致
+    if getattr(sys, "frozen", False):
+        try:
+            exe_icon = QIcon(sys.executable)
+            if not exe_icon.isNull():
+                app.setWindowIcon(exe_icon)
+            else:
+                if DEFAULT_WINDOW_ICON.exists():
+                    app.setWindowIcon(QIcon(str(DEFAULT_WINDOW_ICON)))
+        except Exception:
+            if DEFAULT_WINDOW_ICON.exists():
+                app.setWindowIcon(QIcon(str(DEFAULT_WINDOW_ICON)))
+    else:
+        if DEFAULT_WINDOW_ICON.exists():
+            app.setWindowIcon(QIcon(str(DEFAULT_WINDOW_ICON)))
     window = PackageGui()
     window.show()
     sys.exit(app.exec_())
