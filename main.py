@@ -169,7 +169,17 @@ def parse_package_file(project_dir):
             key, value = [part.strip() for part in line.split("=", 1)]
             key = key.strip()
             value = strip_package_quotes(value)
-            if key:
+            if not key:
+                continue
+            if key == "add_file" and key in config:
+                existing = config[key]
+                if isinstance(existing, list):
+                    existing.append(value)
+                else:
+                    config[key] = [existing, value]
+            elif key in config:
+                config[key] = value
+            else:
                 config[key] = value
     write_log(f"已读取 .package 配置文件: {config_path}", "INFO")
     return config
@@ -539,7 +549,8 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
 
         name_row = QHBoxLayout()
         name_row.addWidget(QLabel("打包名称："))
-        self.project_name_input = QLineEdit("my_app")
+        default_project_name = BASE_DIR.name if BASE_DIR.exists() else "my_app"
+        self.project_name_input = QLineEdit(default_project_name)
         name_row.addWidget(self.project_name_input, 1)
         self.onefile_checkbox = QCheckBox("生成单文件")
         self.onefile_checkbox.setFont(QFont(BUTTON_FONT_NAME, BUTTON_FONT_SIZE))
@@ -622,14 +633,21 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
 
     def _apply_setting_value(self, setting_value):
         values = [part.strip() for part in str(setting_value).split(",") if part.strip()]
-        if len(values) < 3:
+        if len(values) < 4:
+            if len(values) == 3:
+                self.onefile_checkbox.setChecked(values[0] == "1")
+                self.fast_build_checkbox.setChecked(values[1] == "1")
+                self.hide_console_checkbox.setChecked(values[2] == "1")
+                self.reduce_size_checkbox.setChecked(False)
+                write_log(f"配置中的 setting 参数仅包含 3 个值，已按兼容模式处理: {setting_value}", "WARNING")
+                self._append_log(format_log_message(f"配置中的 setting 参数仅包含 3 个值，已按兼容模式处理: {setting_value}", "WARNING"))
+                return
             write_log(f"配置中的 setting 参数格式无效: {setting_value}", "WARNING")
             return
         self.onefile_checkbox.setChecked(values[0] == "1")
         self.fast_build_checkbox.setChecked(values[1] == "1")
         self.hide_console_checkbox.setChecked(values[2] == "1")
-        if len(values) >= 4:
-            self.reduce_size_checkbox.setChecked(values[3] == "1")
+        self.reduce_size_checkbox.setChecked(values[3] == "1")
         write_log(f"已根据 .package 中的 setting 参数更新打包设置: {setting_value}", "INFO")
         self._append_log(format_log_message(f"已根据 .package 中的 setting 参数更新打包设置: {setting_value}", "INFO"))
 
@@ -656,9 +674,17 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
         write_log(f"已从 .package 自动选择打包文件: {[str(path) for path in self.selected_scripts]}", "INFO")
 
     def _apply_add_file_entries(self, add_file_value):
-        entries = [part.strip() for part in str(add_file_value).split(";") if part.strip()]
+        if isinstance(add_file_value, (list, tuple)):
+            raw_entries = []
+            for entry in add_file_value:
+                if entry is None:
+                    continue
+                raw_entries.extend([part.strip() for part in str(entry).split(";") if part.strip()])
+        else:
+            raw_entries = [part.strip() for part in str(add_file_value).split(";") if part.strip()]
+
         added_entries = []
-        for item in entries:
+        for item in raw_entries:
             candidate = resolve_project_relative_value(item, self.project_dir)
             if not candidate.exists():
                 write_log(f"未找到 .package 中的 add_file 资源: {candidate}", "WARNING")
@@ -685,6 +711,9 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
         config = parse_package_file(self.project_dir)
         if not config:
             return
+
+        if not self.project_name_input.text().strip() or self.project_name_input.text().strip() == "my_app":
+            self.project_name_input.setText(self.project_dir.name)
 
         path_value = config.get("path")
         if path_value:
@@ -728,6 +757,8 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
             return
         self.project_dir = Path(directory)
         self.project_path_label.setText(str(self.project_dir))
+        if not self.project_name_input.text().strip() or self.project_name_input.text().strip() == "my_app":
+            self.project_name_input.setText(self.project_dir.name)
         self.detected_files = collect_python_files(self.project_dir)
         self.populate_file_listbox()
         self._load_package_file_settings()

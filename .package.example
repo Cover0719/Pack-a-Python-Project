@@ -9,13 +9,16 @@ path=C:\Users\Administrator\PycharmProjects\PackPython
 pack_file=main.py;app\ui.py;app\main.py
 
 # add_file 用于记录需要添加到打包资源中的文件路径。
-# 这里的路径是项目内相对路径，表示在打包后项目中的位置；
+# 每行只写一个文件路径，多个文件请连续写多行；
+# 这些文件会按顺序添加到打包页面的资源列表中。
 # 例如 /assets/package.ico 表示在打包项目中位于 /assets 文件夹下的 package.ico
-add_file=/assets/package.ico;/assets/logo.png
+add_file=/assets/package.ico
+add_file=/assets/logo.png
+add_file=/assets/data/config.json
 
 # ico_path 用于设置打包文件的 ico 图标路径，仍使用项目内相对路径格式
 ico_path=/assets/package.ico
 
-# setting 参数格式为：生成单文件,加快打包,隐藏命令行
-# 例如 1,1,1 表示：勾选生成单文件、勾选加快打包、勾选隐藏命令行
-setting=1,1,1
+# setting 参数格式为：生成单文件,加快打包,隐藏命令行,减少包体积
+# 例如 1,1,1,0 表示：勾选生成单文件、勾选加快打包、勾选隐藏命令行、不勾选减少包体积
+setting=1,1,1,0
