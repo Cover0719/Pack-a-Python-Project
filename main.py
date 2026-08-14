@@ -15,6 +15,8 @@ from PyQt5.QtGui import QFont, QFontDatabase, QIcon
 from PyQt5.QtWidgets import (
     QApplication,
     QCheckBox,
+    QDialog,
+    QDialogButtonBox,
     QFileDialog,
     QFrame,
     QHBoxLayout,
@@ -32,11 +34,33 @@ from PyQt5.QtWidgets import (
 )
 
 # 全局常量
-BASE_DIR = Path(__file__).resolve().parent  # 项目根目录
+def resolve_runtime_base_dir():
+    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+        executable_path = Path(sys.executable).resolve()
+        if executable_path.exists():
+            return executable_path.parent
+    return Path(__file__).resolve().parent
+
+
+def normalize_resource_target(target_path, include_leading_slash=True):
+    normalized = str(target_path or "").strip().replace("\\", "/")
+    normalized = normalized.strip()
+    if not normalized:
+        normalized = "assets"
+    if include_leading_slash:
+        if not normalized.startswith("/"):
+            normalized = f"/{normalized.lstrip('/')}"
+    else:
+        normalized = normalized.lstrip("/")
+    normalized = normalized.replace("//", "/")
+    return normalized
+
+
+BASE_DIR = resolve_runtime_base_dir()  # 项目根目录
 FONTS_DIR = BASE_DIR / "fonts"  # 字体目录
 ASSETS_DIR = BASE_DIR / "assets"  # 资源目录
 DEFAULT_WINDOW_ICON = ASSETS_DIR / "package.ico"
-OUTPUT_PATH = BASE_DIR / "output"  # 输出目录
+OUTPUT_PATH = Path(r"D:\output")  # 输出目录
 LOG_FILE = ASSETS_DIR / "package_tool.log"  # 日志文件路径
 WINDOW_WIDTH = 1280  # 窗口宽度
 WINDOW_HEIGHT = 760  # 窗口高度
@@ -116,6 +140,54 @@ def ensure_runtime_dirs():  # 确保资源目录和输出目录存在
 ensure_runtime_dirs()
 
 
+def strip_package_quotes(value):
+    if value is None:
+        return ""
+    text = str(value).strip()
+    while len(text) >= 2 and text[0] == text[-1] and text[0] in "\"'":
+        text = text[1:-1].strip()
+    return text
+
+
+def parse_package_file(project_dir):
+    project_dir = Path(project_dir)
+    config_path = project_dir / ".package"
+    if not config_path.exists():
+        write_log(f"未发现 .package 配置文件: {config_path}", "INFO")
+        return {}
+
+    config = {}
+    with open(config_path, "r", encoding="utf-8") as handle:
+        for raw_line in handle:
+            line = raw_line.strip()
+            if not line or line.startswith("#"):
+                continue
+            if "#" in line:
+                line = line.split("#", 1)[0].strip()
+            if not line or "=" not in line:
+                continue
+            key, value = [part.strip() for part in line.split("=", 1)]
+            key = key.strip()
+            value = strip_package_quotes(value)
+            if key:
+                config[key] = value
+    write_log(f"已读取 .package 配置文件: {config_path}", "INFO")
+    return config
+
+
+def resolve_project_relative_value(value, project_dir):
+    project_dir = Path(project_dir)
+    cleaned = strip_package_quotes(value).replace("\\", "/").strip()
+    if not cleaned:
+        return project_dir
+    if cleaned.startswith("/"):
+        cleaned = cleaned.lstrip("/")
+    candidate = Path(cleaned)
+    if not candidate.is_absolute():
+        candidate = project_dir / candidate
+    return candidate
+
+
 def collect_python_files(project_dir):  # 扫描项目目录下的 Python 文件
     if not project_dir or not Path(project_dir).exists():
         write_log("项目目录不存在，无法扫描 Python 文件", "WARNING")
@@ -132,7 +204,7 @@ def collect_python_files(project_dir):  # 扫描项目目录下的 Python 文件
     return python_files
 
 
-def build_pyinstaller_command(entry_scripts, project_name, output_dir, icon_path=None, resources_path=None, onefile=False, fast_mode=False, hide_console=False):  # 构造 PyInstaller 打包命令
+def build_pyinstaller_command(entry_scripts, project_name, output_dir, icon_path=None, resources_path=None, onefile=False, fast_mode=False, hide_console=False, reduce_size=False, resource_entries=None):  # 构造 PyInstaller 打包命令
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     command = [
@@ -147,10 +219,14 @@ def build_pyinstaller_command(entry_scripts, project_name, output_dir, icon_path
         "--specpath",
         str(output_dir / "spec"),
     ]
-    if fast_mode:
+    if fast_mode or reduce_size:
         command.extend(["--log-level", "WARN"])
-        command.extend(["--noupx", "--noarchive"])
+        command.extend(["--noupx"])
         command.extend(["--clean"])
+    if reduce_size:
+        command.extend(["--optimize", "2"])
+        if sys.platform.startswith("linux"):
+            command.append("--strip")
     if hide_console:
         command.append("--windowed")
     if onefile:
@@ -161,14 +237,20 @@ def build_pyinstaller_command(entry_scripts, project_name, output_dir, icon_path
     trusted_icon = Path(icon_path) if icon_path else DEFAULT_WINDOW_ICON
     if trusted_icon and trusted_icon.exists():
         command.extend(["--icon", str(trusted_icon)])
-    if resources_path and Path(resources_path).exists():
+    if resource_entries:
+        for source_path, target_path in resource_entries:
+            source = Path(source_path)
+            if source.exists():
+                packaging_target = normalize_resource_target(target_path, include_leading_slash=False)
+                command.extend(["--add-data", f"{source}{os.pathsep}{packaging_target}"])
+    elif resources_path and Path(resources_path).exists():
         command.extend(["--add-data", f"{resources_path}{os.pathsep}resources"])
     command.extend([str(script) for script in entry_scripts])
     write_log(f"已生成打包命令: {' '.join(command)}", "INFO")
     return command
 
 
-def run_pyinstaller(entry_scripts, project_dir, project_name, output_dir, icon_path=None, resources_path=None, onefile=False, fast_mode=False, log_emitter=None, progress_emitter=None, hide_console=False):  # 执行打包流程
+def run_pyinstaller(entry_scripts, project_dir, project_name, output_dir, icon_path=None, resources_path=None, onefile=False, fast_mode=False, log_emitter=None, progress_emitter=None, hide_console=False, reduce_size=False, resource_entries=None):  # 执行打包流程
     pyinstaller_scripts = [Path(script) for script in entry_scripts]
     if not pyinstaller_scripts:
         write_log("没有选择任何 Python 文件，打包已取消", "WARNING")
@@ -187,7 +269,18 @@ def run_pyinstaller(entry_scripts, project_dir, project_name, output_dir, icon_p
 
     emit_progress(5)
 
-    command = build_pyinstaller_command(pyinstaller_scripts, project_name, output_dir, icon_path, resources_path, onefile, fast_mode=fast_mode, hide_console=hide_console)
+    command = build_pyinstaller_command(
+        pyinstaller_scripts,
+        project_name,
+        output_dir,
+        icon_path,
+        resources_path,
+        onefile,
+        fast_mode=fast_mode,
+        hide_console=hide_console,
+        reduce_size=reduce_size,
+        resource_entries=resource_entries,
+    )
     emit_log(f"开始在项目目录 {project_dir} 中执行打包", "INFO")
 
     output_lines = []
@@ -225,27 +318,19 @@ def run_pyinstaller(entry_scripts, project_dir, project_name, output_dir, icon_p
     if completed_process.returncode == 0:
         emit_progress(100)
         emit_log("打包已成功完成，输出目录已生成", "SUCCESS")
-        if resources_path and Path(resources_path).exists():
-            target_resources_dir = output_dir / "dist" / project_name / "resources"
-            target_resources_dir.mkdir(parents=True, exist_ok=True)
-            resources_items = list(Path(resources_path).iterdir())
-            if resources_items:
-                emit_log("开始并行复制资源文件以提高速度", "INFO")
-                from concurrent.futures import ThreadPoolExecutor
-
-                def copy_item(resource_item):
-                    destination = target_resources_dir / resource_item.name
-                    if resource_item.is_dir():
-                        shutil.copytree(resource_item, destination, dirs_exist_ok=True)
-                    else:
-                        shutil.copy2(resource_item, destination)
-                    return resource_item.name
-
-                max_workers = min(4, os.cpu_count() or 1)
-                with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                    for item_name in executor.map(copy_item, resources_items):
-                        emit_log(f"已复制资源：{item_name}", "INFO")
-            emit_log(f"资源目录已复制至 {target_resources_dir}", "INFO")
+        if resource_entries:
+            for source_path, relative_target in resource_entries:
+                source = Path(source_path)
+                if not source.exists():
+                    continue
+                normalized_relative = normalize_resource_target(relative_target, include_leading_slash=False)
+                destination = output_dir / "dist" / project_name / normalized_relative
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                if source.is_dir():
+                    shutil.copytree(source, destination, dirs_exist_ok=True)
+                else:
+                    shutil.copy2(source, destination)
+                emit_log(f"已复制资源：{source} -> {destination}", "INFO")
         return completed_process
 
     error_text = completed_process.stderr or completed_process.stdout or "未知打包错误"
@@ -258,7 +343,7 @@ class PackagingWorker(QObject):  # 后台打包线程
     log_signal = pyqtSignal(str, str)
     progress_signal = pyqtSignal(int)
 
-    def __init__(self, entry_scripts, project_dir, project_name, output_dir, icon_path, resources_path, onefile, fast_mode=False, hide_console=False):
+    def __init__(self, entry_scripts, project_dir, project_name, output_dir, icon_path, resources_path, onefile, fast_mode=False, hide_console=False, reduce_size=False, resource_entries=None):
         super().__init__()
         self.entry_scripts = entry_scripts
         self.project_dir = project_dir
@@ -269,6 +354,8 @@ class PackagingWorker(QObject):  # 后台打包线程
         self.onefile = onefile
         self.fast_mode = fast_mode
         self.hide_console = hide_console
+        self.reduce_size = reduce_size
+        self.resource_entries = resource_entries or []
 
     def run(self):  # 执行打包任务
         result = run_pyinstaller(
@@ -283,6 +370,8 @@ class PackagingWorker(QObject):  # 后台打包线程
             progress_emitter=self.progress_signal.emit,
             fast_mode=self.fast_mode,
             hide_console=self.hide_console,
+            reduce_size=self.reduce_size,
+            resource_entries=self.resource_entries,
         )
         self.finished.emit(result)
 
@@ -302,6 +391,7 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
         self.resources_path = None
         self.output_dir = OUTPUT_PATH
         self.selected_resource_paths = []
+        self.resource_entries = []
         self.packaging_thread = None
         self.packaging_worker = None
         self._build_ui()
@@ -401,26 +491,41 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
         left_layout.addLayout(icon_row)
 
         resource_row = QHBoxLayout()
-        resource_btn = QPushButton("选择资源目录")
-        resource_btn.clicked.connect(self.select_resources_dir)
+        resource_btn = QPushButton("添加打包资源")
+        resource_btn.clicked.connect(self.add_resource_entry)
         resource_btn.setFont(QFont(BUTTON_FONT_NAME, BUTTON_FONT_SIZE))
         resource_row.addWidget(resource_btn)
-        self.resources_path_label = QLabel("未选择资源目录")
+        self.resources_path_label = QLabel("未添加资源")
         self.resources_path_label.setWordWrap(True)
         resource_row.addWidget(self.resources_path_label, 1)
         left_layout.addLayout(resource_row)
 
-        self.resources_view = QPlainTextEdit()
-        self.resources_view.setReadOnly(True)
-        self.resources_view.setLineWrapMode(QPlainTextEdit.NoWrap)
-        self.resources_view.setPlaceholderText("已选择的资源路径将显示在这里")
-        self.resources_view.setMaximumHeight(TEXT_BOX_HEIGHT)
-        self.resources_view.setMinimumHeight(TEXT_BOX_HEIGHT)
-        self.resources_label = QLabel("已选资源路径")
-        left_layout.addWidget(self.resources_label)
-        left_layout.addWidget(self.resources_view)
-        self.resources_label.setVisible(False)
-        self.resources_view.setVisible(False)
+        self.resources_panel = QWidget(self)
+        resources_panel_layout = QHBoxLayout(self.resources_panel)
+        resources_panel_layout.setContentsMargins(0, 0, 0, 0)
+        resources_panel_layout.setSpacing(6)
+
+        left_resources_widget = QWidget(self)
+        left_resources_layout = QVBoxLayout(left_resources_widget)
+        left_resources_layout.setContentsMargins(0, 0, 0, 0)
+        left_resources_layout.addWidget(QLabel("电脑中的路径"))
+        self.resource_source_list = QListWidget()
+        self.resource_source_list.setMinimumHeight(TEXT_BOX_HEIGHT)
+        self.resource_source_list.setMaximumHeight(TEXT_BOX_HEIGHT)
+        left_resources_layout.addWidget(self.resource_source_list)
+
+        right_resources_widget = QWidget(self)
+        right_resources_layout = QVBoxLayout(right_resources_widget)
+        right_resources_layout.setContentsMargins(0, 0, 0, 0)
+        right_resources_layout.addWidget(QLabel("打包项目中的相对路径"))
+        self.resource_target_list = QListWidget()
+        self.resource_target_list.setMinimumHeight(TEXT_BOX_HEIGHT)
+        self.resource_target_list.setMaximumHeight(TEXT_BOX_HEIGHT)
+        right_resources_layout.addWidget(self.resource_target_list)
+
+        resources_panel_layout.addWidget(left_resources_widget, 1)
+        resources_panel_layout.addWidget(right_resources_widget, 1)
+        left_layout.addWidget(self.resources_panel)
 
         output_row = QHBoxLayout()
         output_btn = QPushButton("选择输出目录")
@@ -450,6 +555,10 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
         self.hide_console_checkbox.setFont(QFont(BUTTON_FONT_NAME, BUTTON_FONT_SIZE))
         self.hide_console_checkbox.setChecked(False)
         options_row.addWidget(self.hide_console_checkbox)
+        self.reduce_size_checkbox = QCheckBox("减少包体积（优化、去除 UPX）")
+        self.reduce_size_checkbox.setChecked(False)
+        self.reduce_size_checkbox.setFont(QFont(BUTTON_FONT_NAME, BUTTON_FONT_SIZE))
+        options_row.addWidget(self.reduce_size_checkbox)
         options_row.addStretch(1)
         left_layout.addLayout(options_row)
 
@@ -511,6 +620,107 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
     def handle_log_message(self, message, level):  # 在主线程中更新日志面板
         self._append_log(message)
 
+    def _apply_setting_value(self, setting_value):
+        values = [part.strip() for part in str(setting_value).split(",") if part.strip()]
+        if len(values) < 3:
+            write_log(f"配置中的 setting 参数格式无效: {setting_value}", "WARNING")
+            return
+        self.onefile_checkbox.setChecked(values[0] == "1")
+        self.fast_build_checkbox.setChecked(values[1] == "1")
+        self.hide_console_checkbox.setChecked(values[2] == "1")
+        if len(values) >= 4:
+            self.reduce_size_checkbox.setChecked(values[3] == "1")
+        write_log(f"已根据 .package 中的 setting 参数更新打包设置: {setting_value}", "INFO")
+        self._append_log(format_log_message(f"已根据 .package 中的 setting 参数更新打包设置: {setting_value}", "INFO"))
+
+    def _apply_pack_file_selection(self, pack_file_value):
+        names = [part.strip() for part in str(pack_file_value).split(";") if part.strip()]
+        selected_paths = []
+        for name in names:
+            candidate = resolve_project_relative_value(name, self.project_dir)
+            if candidate.exists():
+                selected_paths.append(candidate)
+        self.selected_scripts = selected_paths
+        self.file_list_widget.clearSelection()
+        self.file_list_widget.setCurrentRow(-1)
+        for file_path in self.selected_scripts:
+            try:
+                relative_path = str(file_path.relative_to(self.project_dir))
+            except ValueError:
+                relative_path = str(file_path)
+            for index in range(self.file_list_widget.count()):
+                if self.file_list_widget.item(index).text() == relative_path:
+                    self.file_list_widget.item(index).setSelected(True)
+                    break
+        self.file_count_label.setText(f"已选择 {len(self.selected_scripts)} 个文件")
+        write_log(f"已从 .package 自动选择打包文件: {[str(path) for path in self.selected_scripts]}", "INFO")
+
+    def _apply_add_file_entries(self, add_file_value):
+        entries = [part.strip() for part in str(add_file_value).split(";") if part.strip()]
+        added_entries = []
+        for item in entries:
+            candidate = resolve_project_relative_value(item, self.project_dir)
+            if not candidate.exists():
+                write_log(f"未找到 .package 中的 add_file 资源: {candidate}", "WARNING")
+                continue
+            item_path = str(item).replace("\\", "/").strip()
+            normalized_item = item_path.lstrip("/")
+            relative_dir = str(Path(normalized_item).parent).replace("\\", "/").strip("/")
+            if not relative_dir:
+                relative_dir = "assets"
+            added_entries.append((str(candidate), relative_dir))
+        if added_entries:
+            self.resource_entries = added_entries
+            write_log(f"已从 .package 自动添加资源: {added_entries}", "INFO")
+            self._append_log(format_log_message(f"已从 .package 自动添加资源: {added_entries}", "INFO"))
+        self._refresh_resource_lists()
+
+    def _load_package_file_settings(self):
+        if not self.project_dir or not self.project_dir.exists():
+            return
+        config_file = self.project_dir / ".package"
+        if not config_file.exists():
+            write_log(f"未发现项目配置文件 .package，路径为: {config_file}", "INFO")
+            return
+        config = parse_package_file(self.project_dir)
+        if not config:
+            return
+
+        path_value = config.get("path")
+        if path_value:
+            candidate = resolve_project_relative_value(path_value, self.project_dir)
+            if candidate.exists() and candidate.is_dir():
+                self.project_dir = candidate
+                self.project_path_label.setText(str(self.project_dir))
+                write_log(f"已根据 .package 中的 path 设定项目目录: {self.project_dir}", "INFO")
+
+        self.detected_files = collect_python_files(self.project_dir)
+        self.populate_file_listbox()
+
+        pack_value = config.get("pack_file")
+        if pack_value:
+            self._apply_pack_file_selection(pack_value)
+
+        add_value = config.get("add_file")
+        if add_value:
+            self._apply_add_file_entries(add_value)
+
+        ico_value = config.get("ico_path")
+        if ico_value:
+            candidate = resolve_project_relative_value(ico_value, self.project_dir)
+            if candidate.exists():
+                self.icon_path = candidate
+                self.icon_path_label.setText(str(candidate))
+                write_log(f"已根据 .package 中的 ico_path 配置图标: {candidate}", "INFO")
+
+        setting_value = config.get("setting")
+        if setting_value:
+            self._apply_setting_value(setting_value)
+
+        reduce_size_value = config.get("reduce_size")
+        if reduce_size_value is not None:
+            self.reduce_size_checkbox.setChecked(str(reduce_size_value).strip().lower() in {"1", "true", "yes", "on"})
+
     def select_project_dir(self):  # 选择 Python 项目目录
         directory = QFileDialog.getExistingDirectory(self, "选择 Python 项目目录", str(BASE_DIR))
         if not directory:
@@ -520,6 +730,7 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
         self.project_path_label.setText(str(self.project_dir))
         self.detected_files = collect_python_files(self.project_dir)
         self.populate_file_listbox()
+        self._load_package_file_settings()
         write_log(f"已选择项目目录: {self.project_dir}", "INFO")
         self._append_log(format_log_message(f"已选择项目目录: {self.project_dir}", "INFO"))
 
@@ -585,21 +796,57 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
             write_log(f"已选择图标文件: {self.icon_path}", "INFO")
         self._append_log(format_log_message(f"已选择图标文件: {self.icon_path}", "INFO"))
 
-    def select_resources_dir(self):  # 选择需要一起打包的资源目录
-        resources_dir = QFileDialog.getExistingDirectory(self, "选择资源目录", str(ASSETS_DIR))
-        if not resources_dir:
-            write_log("用户取消了资源目录选择", "INFO")
+    def _refresh_resource_lists(self):
+        self.resource_source_list.clear()
+        self.resource_target_list.clear()
+        for source_path, target_path in self.resource_entries:
+            self.resource_source_list.addItem(source_path)
+            self.resource_target_list.addItem(normalize_resource_target(target_path, include_leading_slash=True))
+        if self.resource_entries:
+            self.resources_path_label.setText(f"已添加 {len(self.resource_entries)} 个资源")
+        else:
+            self.resources_path_label.setText("未添加资源")
+
+    def add_resource_entry(self):  # 添加打包资源并指定在项目中的相对路径
+        resource_file, _ = QFileDialog.getOpenFileName(
+            self,
+            "选择要打包的资源文件",
+            str(BASE_DIR),
+            "所有文件 (*.*)",
+        )
+        if not resource_file:
+            write_log("用户取消了资源添加", "INFO")
             return
-        resources_path = Path(resources_dir)
-        if str(resources_path) not in self.selected_resource_paths:
-            self.selected_resource_paths.append(str(resources_path))
-        self.resources_path = resources_path
-        self.resources_path_label.setText(str(self.resources_path))
-        self.resources_view.setPlainText("\n".join(self.selected_resource_paths))
-        self.resources_label.setVisible(True)
-        self.resources_view.setVisible(True)
-        write_log(f"已选择资源目录: {self.resources_path}", "INFO")
-        self._append_log(format_log_message(f"已选择资源目录: {self.resources_path}", "INFO"))
+
+        selected_resource = Path(resource_file)
+        dialog = QDialog(self)
+        dialog.setWindowTitle("确认资源路径")
+        dialog.setModal(True)
+        dialog_layout = QVBoxLayout(dialog)
+        dialog_layout.addWidget(QLabel("当前选择的文件路径："))
+        source_label = QLabel(str(selected_resource))
+        source_label.setWordWrap(True)
+        dialog_layout.addWidget(source_label)
+        dialog_layout.addWidget(QLabel("请输入在打包项目中的相对路径："))
+        target_input = QLineEdit("/assets")
+        dialog_layout.addWidget(target_input)
+        button_box = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        button_box.accepted.connect(dialog.accept)
+        button_box.rejected.connect(dialog.reject)
+        dialog_layout.addWidget(button_box)
+
+        if dialog.exec_() != QDialog.Accepted:
+            write_log("用户取消了资源确认", "INFO")
+            return
+
+        relative_target = normalize_resource_target(target_input.text(), include_leading_slash=False)
+        if not relative_target:
+            relative_target = "assets"
+
+        self.resource_entries.append((str(selected_resource), relative_target))
+        self._refresh_resource_lists()
+        write_log(f"已添加资源: {selected_resource} -> {relative_target}", "INFO")
+        self._append_log(format_log_message(f"已添加资源: {selected_resource} -> {relative_target}", "INFO"))
 
     def select_output_dir(self):  # 选择打包输出目录
         output_dir = QFileDialog.getExistingDirectory(self, "选择打包输出目录", str(OUTPUT_PATH))
@@ -623,6 +870,7 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
             return
         project_name = self.project_name_input.text().strip() or self.project_dir.name
         onefile = self.onefile_checkbox.isChecked()
+        reduce_size = self.reduce_size_checkbox.isChecked()
         self.start_btn.setEnabled(False)
         self.progress_bar.setVisible(True)
         self.progress_bar.setValue(0)
@@ -638,6 +886,8 @@ class PackageGui(QMainWindow):  # 创建主界面窗口
             onefile,
             fast_mode=self.fast_build_checkbox.isChecked(),
             hide_console=self.hide_console_checkbox.isChecked(),
+            reduce_size=reduce_size,
+            resource_entries=self.resource_entries,
         )
         self.packaging_worker.moveToThread(self.packaging_thread)
         self.packaging_thread.started.connect(self.packaging_worker.run)

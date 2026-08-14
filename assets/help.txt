@@ -1,0 +1,686 @@
+#常量部分
+BASE_DIR
+    初始化位置：19
+    作用：项目根目录，表示当前脚本所在目录，所有相对路径都基于该目录计算。
+    引用位置：
+        1.第20行：
+            作为 FONTS_DIR、ASSETS_DIR、OUTPUT_PATH 等目录的基础路径
+        2.第633行：
+            打开项目目录时以 BASE_DIR 作为默认起始目录
+
+FONTS_DIR
+    初始化位置：20
+    作用：字体目录，存放 icon_font.ttf、log_font.ttf、body_font.ttf 等自定义字体资源。
+    引用位置：
+        1.第21行：
+            用于组织字体资源目录
+        2.第77行：
+            作为字体文件路径的父目录
+
+ASSETS_DIR
+    初始化位置：21
+    作用：项目资源目录，默认存放图标、日志及辅助文件。
+    引用位置：
+        1.第22行：
+            作为默认图标、日志文件目录的基础
+        2.第32行：
+            作为界面资源选择器的默认目录
+        3.第133行：
+            作为图标文件和资源目录的默认路径
+
+DEFAULT_WINDOW_ICON
+    初始化位置：22
+    作用：默认主窗口图标，指向 assets/package.ico。
+    引用位置：
+        1.第280行：
+            设置窗口图标时默认使用该图标
+        2.第789行：
+            主程序启动时若无有效图标则回退到此图标
+
+OUTPUT_PATH
+    初始化位置：23
+    作用：默认打包输出目录，当前配置为 D:\output。
+    引用位置：
+        1.第269行：
+            初始化 PackageGui 时挂载默认输出目录
+        2.第674行：
+            选择输出目录时默认以该目录作为起始目录
+        3.第702行：
+            打包完成后输出目录提示使用该路径
+
+LOG_FILE
+    初始化位置：24
+    作用：定义日志文件位置，保存程序运行过程中的日志数据。
+    引用位置：
+        1.第84行：
+            用于写日志获取文件路径
+        2.第112行 with 第113行：
+            用于确认日志文件是否存在
+        3.第478行：
+            查看日志按钮打开日志
+        4.第740行：
+            通过 os.startfile 打开日志文件
+
+WINDOW_WIDTH
+    初始化位置：25
+    作用：主窗口默认宽度，设定界面布局的初始宽度。
+    引用位置：
+        1.第280行：
+            设置窗口大小时使用该值
+
+WINDOW_HEIGHT
+    初始化位置：26
+    作用：主窗口默认高度，设定界面布局的初始高度。
+    引用位置：
+        1.第281行：
+            设置窗口高度时使用该值
+
+LOG_PANEL_WIDTH
+    初始化位置：27
+    作用：日志面板在主布局中所占宽度。
+    引用位置：
+        1.第588行：
+            设置左右分栏宽度比例时使用
+
+LIST_HEIGHT
+    初始化位置：28
+    作用：文件列表框的默认高度，用于显示识别出的 Python 文件列表。
+    引用位置：
+        1.第391行：
+            设置识别文件列表的最小和最大高度
+
+TEXT_BOX_HEIGHT
+    初始化位置：29
+    作用：资源列表和日志显示区域的默认高度，控制可视化区域大小。
+    引用位置：
+        1.第434行：
+            设置资源列表的最小和最大高度
+        2.第519行：
+            设置日志文本框的高度
+
+BUTTON_COLOR
+    初始化位置：30
+    作用：主要按钮的默认背景颜色，体现界面主色调。
+    引用位置：
+        1.第300行：
+            设置按钮样式时使用
+
+BUTTON_HOVER_COLOR
+    初始化位置：31
+    作用：按钮悬停状态时的背景颜色。
+    引用位置：
+        1.第300行：
+            设置按钮样式时使用
+
+BUTTON_DISABLED_COLOR
+    初始化位置：32
+    作用：按钮禁用状态时的背景颜色。
+    引用位置：
+        1.第300行：
+            设置按钮样式时使用
+
+BUTTON_DISABLED_TEXT
+    初始化位置：33
+    作用：按钮禁用状态下的文字颜色。
+    引用位置：
+        1.第300行：
+            设置按钮样式时使用
+
+BACKGROUND_COLOR
+    初始化位置：34
+    作用：界面整体背景色。
+    引用位置：
+        1.第300行：
+            设置 QMainWindow 的背景色
+
+TEXT_COLOR
+    初始化位置：35
+    作用：界面主要文字颜色。
+    引用位置：
+        1.第300行：
+            设置 QLabel 和文本颜色
+
+BORDER_COLOR
+    初始化位置：36
+    作用：输入框、列表框等控件的边框颜色。
+    引用位置：
+        1.第300行：
+            设置控件样式时使用
+
+PANEL_RADIUS
+    初始化位置：37
+    作用：主面板和按钮圆角半径。
+    引用位置：
+        1.第300行：
+            设置按钮和控件的圆角样式
+
+BUTTON_FONT_NAME
+    初始化位置：38
+    作用：按钮使用的字体名称，默认使用 Microsoft YaHei。
+    引用位置：
+        1.第358行：
+            为按钮设置字体
+
+BUTTON_FONT_SIZE
+    初始化位置：39
+    作用：按钮字体大小。
+    引用位置：
+        1.第358行：
+            为按钮设置字体
+
+ICON_FONT_NAME
+    初始化位置：40
+    作用：图标字体名称，默认字符“IconFont”。
+    引用位置：
+        1.第376行：
+            图标字体在界面初始化时加载
+
+ICON_FONT_SIZE
+    初始化位置：41
+    作用：图标字体大小。
+    引用位置：
+        1.第376行：
+            作为字体样式参数使用
+
+LOG_FONT_NAME
+    初始化位置：42
+    作用：日志区使用的字体名称。
+    引用位置：
+        1.第520行：
+            日志文本框设置字体时使用
+
+LOG_FONT_SIZE
+    初始化位置：43
+    作用：日志区字体大小。
+    引用位置：
+        1.第520行：
+            日志文本框设置字体时使用
+
+BODY_FONT_NAME
+    初始化位置：44
+    作用：主界面常规字体名称。
+    引用位置：
+        1.第281行：
+            设置主窗口字体
+        2.第300行：
+            设置 QWidget 字体
+
+BODY_FONT_SIZE
+    初始化位置：45
+    作用：主界面常规字体大小。
+    引用位置：
+        1.第281行：
+            设置主窗口字体
+        2.第300行：
+            设置 QWidget 字体
+
+ICON_FONT_FILE
+    初始化位置：47
+    作用：图标字体文件路径，指向 fonts/icon_font.ttf。
+    引用位置：
+        1.第86行：
+            作为 load_custom_font() 的参数
+
+LOG_FONT_FILE
+    初始化位置：48
+    作用：日志字体文件路径，指向 fonts/log_font.ttf。
+    引用位置：
+        1.第87行：
+            作为 load_custom_font() 的参数
+
+BODY_FONT_FILE
+    初始化位置：49
+    作用：主体字体文件路径，指向 fonts/body_font.ttf。
+    引用位置：
+        1.第88行：
+            作为 load_custom_font() 的参数
+
+
+#变量部分
+ctypes
+    初始化位置：6
+    常见变量值的含义：
+        1. None：说明当前环境未成功导入 ctypes，通常在非 Windows 或模块加载失败时出现
+        2. ctypes.windll.shell32：Windows API 模块对象，用于调用 SetCurrentProcessExplicitAppUserModelID
+    被引用位置：
+        1. 被 main() 引用：用于在 Windows 上设置 AppUserModelID，保证任务栏图标正确显示
+
+QThread
+    初始化位置：10
+    常见变量值的含义：
+        1. QThread 对象：后台线程实例，用于在不阻塞 UI 的情况下执行打包逻辑
+        2. None：尚未创建线程时的临时状态
+    被引用位置：
+        1. 被 start_packaging() 引用：创建并启动后台打包线程
+        2. 被 PackagingWorker.run() 关联逻辑引用：执行打包任务
+
+QObject
+    初始化位置：10
+    常见变量值的含义：
+        1. QObject 子类实例：后台任务对象，可接收信号并执行耗时逻辑
+    被引用位置：
+        1. 被 PackagingWorker 类定义引用：继承 QObject 以支持 Qt 信号槽机制
+
+pyqtSignal
+    初始化位置：10
+    常见变量值的含义：
+        1. finished：打包结束信号
+        2. log_signal：日志回显信号
+        3. progress_signal：进度更新信号
+    被引用位置：
+        1. 被 PackagingWorker 类引用：定义信号字段
+
+pyqtSlot
+    初始化位置：10
+    常见变量值的含义：
+        1. 函数装饰器：把函数标记为 Qt 槽函数，便于信号连接
+    被引用位置：
+        1. 被 handle_progress() 引用：处理进度更新
+        2. 被 handle_log_message() 引用：处理后台日志
+        3. 被 on_packaging_finished() 引用：处理打包完成事件
+
+QFont
+    初始化位置：11
+    常见变量值的含义：
+        1. QFont 对象：设置界面字体
+        2. 默认字体对象：应用于窗口、按钮、日志文本框
+    被引用位置：
+        1. 被 PackageGui.__init__() 引用：设置窗口字体
+        2. 被 _build_ui() 引用：设置按钮和日志区字体
+
+QFontDatabase
+    初始化位置：11
+    常见变量值的含义：
+        1. 字体数据库对象：用于注册自定义字体文件
+    被引用位置：
+        1. 被 load_custom_font() 引用：加载 icon_font.ttf 等字体文件
+
+QIcon
+    初始化位置：11
+    常见变量值的含义：
+        1. 图标对象：可用于窗口图标或程序图标
+        2. 空图标：可能表示图标文件无效，随后触发回退逻辑
+    被引用位置：
+        1. 被 PackageGui.__init__() 引用：设置窗口图标
+        2. 被 main() 引用：设置已打包 exe 的图标
+
+QApplication
+    初始化位置：12
+    常见变量值的含义：
+        1. QApplication 实例：Qt 入口对象，负责消息循环
+    被引用位置：
+        1. 被 main() 引用：创建 GUI 主应用
+
+QCheckBox
+    初始化位置：12
+    常见变量值的含义：
+        1. True/False：打包选项是否勾选
+        2. onefile_checkbox：判断是否生成单文件
+        3. fast_build_checkbox：判断是否快速打包
+        4. hide_console_checkbox：判断是否隐藏命令行窗口
+    被引用位置：
+        1. 被 start_packaging() 引用：读取是否勾选生成单文件、快速打包、隐藏命令行
+        2. 被 _apply_setting_value() 引用：从 .package 配置中回填勾选状态
+
+QDialog
+    初始化位置：12
+    常见变量值的含义：
+        1. QDialog 实例：弹出确认资源路径窗口
+        2. 被接受/拒绝状态：表示用户是否确认当前资源路径
+    被引用位置：
+        1. 被 add_resource_entry() 引用：显示资源路径确认对话框
+
+QFileDialog
+    初始化位置：12
+    常见变量值的含义：
+        1. 目录字符串：用户选择的项目目录或输出目录
+        2. 文件路径字符串：用户选择的图标、资源、脚本文件
+    被引用位置：
+        1. 被 select_project_dir() 引用：选择项目目录
+        2. 被 select_python_files() 引用：选择要打包的 Python 文件
+        3. 被 select_icon_file() 引用：选择图标文件
+        4. 被 add_resource_entry() 引用：选择资源文件
+        5. 被 select_output_dir() 引用：选择输出目录
+
+QListWidget
+    初始化位置：12
+    常见变量值的含义：
+        1. file_list_widget：显示所有 Python 文件
+        2. resource_source_list：显示资源在电脑中的路径
+        3. resource_target_list：显示资源在打包项目中的相对路径
+    被引用位置：
+        1. 被 populate_file_listbox() 引用：填充扫描到的 Python 文件
+        2. 被 _refresh_resource_lists() 引用：刷新已添加资源列表
+        3. 被 _apply_pack_file_selection() 引用：自动选中 .package 配置中的 Python 文件
+
+QLineEdit
+    初始化位置：12
+    常见变量值的含义：
+        1. project_name_input：项目名称输入框
+        2. target_input：资源在打包项目内的目标路径输入框
+    被引用位置：
+        1. 被 start_packaging() 引用：读取项目名
+        2. 被 add_resource_entry() 引用：读取用户填写的资源相对路径
+
+QProgressBar
+    初始化位置：12
+    常见变量值的含义：
+        1. 0~100：打包进度百分比
+        2. 100：打包完成状态
+    被引用位置：
+        1. 被 handle_progress() 引用：更新打包进度
+        2. 被 start_packaging() 引用：初始化与显示进度条
+
+self.project_dir
+    初始化位置：286
+    常见变量值的含义：
+        1. Path 对象：当前选择的项目目录
+        2. None：尚未选择项目目录
+    被引用位置：
+        1. 被 select_project_dir() 引用：设置项目路径
+        2. 被 collect_python_files() 引用：扫描当前项目下的 Python 文件
+        3. 被 _load_package_file_settings() 引用：读取 .package 配置
+
+self.resource_entries
+    初始化位置：300
+    常见变量值的含义：
+        1. 列表：每个元素为 (source_path, target_relative_path) 的二元组
+        2. []：表示当前还没有添加资源
+    被引用位置：
+        1. 被 _refresh_resource_lists() 引用：显示已添加资源的源路径与相对路径
+        2. 被 start_packaging() 引用：将资源项传入打包流程
+        3. 被 _apply_add_file_entries() 引用：从 .package 自动导入资源配置
+
+
+#函数部分
+get_time()
+    初始化位置：52 - 55
+    作用：获取当前时间，并将其转换成 yyyy-mm-dd HH:MM:SS 格式，供日志输出使用。
+    引用内容：None
+    被引用位置：
+        1.第57行：
+            format_log_message() 中用于生成时间戳
+        2.第111行：
+            ensure_runtime_dirs() 中用于日志文件初始化
+
+format_log_message(message, level="INFO")
+    初始化位置：58 - 60
+    作用：将消息和时间、日志等级组合成统一格式，便于日志文件与界面输出统一管理。
+    引用内容：
+        1. message：日志文本
+        2. level：日志级别，如 INFO、WARNING、ERROR、SUCCESS
+    被引用位置：
+        1.第84行：
+            write_log() 中调用
+        2.第115行：
+            ensure_runtime_dirs() 中写入初始化日志
+        3.第637行：
+            project_dir 选择成功后记日志
+        4.第650行：
+            打包文件选择完成后记日志
+        5.第691行：
+            图标文件选择后记日志
+        6.第729行：
+            资源添加成功后记日志
+        7.第760行：
+            输出目录选择成功后记日志
+        8.第773行：
+            后台打包线程启动后记日志
+
+write_log(message, level="INFO", log_mode_f=1)
+    初始化位置：63 - 75
+    作用：将日志信息写入 LOG_FILE，支持不同日志模式控制输出行为。
+    引用内容：
+        1. message：要写入的日志内容
+        2. level：日志级别
+        3. log_mode_f：日志模式开关，1 表示写入日志文件，0 表示静默，其他值执行错误输出
+    被引用位置：
+        1.第96行：
+            collect_python_files() 中记录扫描结果
+        2.第134行：
+            build_pyinstaller_command() 中记录命令生成
+        3.第171行：
+            run_pyinstaller() 中记录打包开始
+        4.第259行：
+            PackagingWorker.run() 中记录后台线程执行状态
+        5.第286行：
+            PackageGui.__init__() 初始化日志
+
+load_custom_font(font_path, fallback_name)
+    初始化位置：78 - 85
+    作用：尝试加载自定义字体文件，若加载成功则返回可用字体族名，否则回退到备用字体。
+    引用内容：
+        1. font_path：字体文件路径
+        2. fallback_name：默认备用字体名
+    被引用位置：
+        1.第90行：
+            load_font_families() 调用
+
+load_font_families()
+    初始化位置：88 - 92
+    作用：加载界面所需的图标字体、日志字体和普通字体，并覆盖全局字体名称变量。
+    引用内容：
+        1. ICON_FONT_NAME
+        2. LOG_FONT_NAME
+        3. BODY_FONT_NAME
+    被引用位置：
+        1.第783行：
+            main() 中设置字体之前调用
+
+ensure_runtime_dirs()
+    初始化位置：95 - 103
+    作用：确认 ASSETS_DIR 和 OUTPUT_PATH 存在，并初始化日志文件，保证运行环境准备完毕。
+    引用内容：None
+    被引用位置：
+        1.第105行：
+            在程序启动时自动执行一次
+
+collect_python_files(project_dir)
+    初始化位置：108 - 121
+    作用：递归扫描项目目录下的 Python 文件，过滤常见忽略目录（.git、.venv、__pycache__ 等），返回已排序的文件列表。
+    引用内容：
+        1. project_dir：要扫描的目标目录
+    被引用位置：
+        1.第631行：
+            select_project_dir() 中选择项目目录后调用
+
+build_pyinstaller_command(entry_scripts, project_name, output_dir, icon_path=None, resources_path=None, onefile=False, fast_mode=False, hide_console=False, resource_entries=None)
+    初始化位置：124 - 153
+    作用：根据脚本、项目名称、输出目录、图标路径、资源路径以及单文件/窗口化标志，拼接 PyInstaller 的命令参数。
+    引用内容：
+        1. entry_scripts：待打包脚本
+        2. project_name：输出程序名
+        3. output_dir：输出目录
+        4. icon_path：图标路径
+        5. resources_path：旧资源目录参数
+        6. onefile：是否单文件打包
+        7. fast_mode：是否快速打包
+        8. hide_console：是否隐藏命令行窗口
+        9. resource_entries：资源项列表
+    被引用位置：
+        1.第180行：
+            run_pyinstaller() 中调用构建命令
+
+run_pyinstaller(entry_scripts, project_dir, project_name, output_dir, icon_path=None, resources_path=None, onefile=False, fast_mode=False, log_emitter=None, progress_emitter=None, hide_console=False, resource_entries=None)
+    初始化位置：156 - 234
+    作用：执行真正的 PyInstaller 打包流程，监听输出日志，更新进度，并在打包成功后复制额外资源文件。
+    引用内容：
+        1. entry_scripts：脚本列表
+        2. project_dir：项目目录
+        3. project_name：输出名称
+        4. output_dir：输出目录
+        5. icon_path：图标文件
+        6. resources_path：旧资源目录
+        7. onefile：是否单文件
+        8. fast_mode：是否快速打包
+        9. log_emitter：日志回调
+        10. progress_emitter：进度回调
+        11. hide_console：是否隐藏命令行窗口
+        12. resource_entries：资源配置项
+    被引用位置：
+        1.第267行：
+            PackagingWorker.run() 中调用
+
+PackagingWorker(QObject)
+    初始化位置：236 - 287
+    作用：PyQt 后台打包线程对象，负责执行打包逻辑并通过信号回传日志和进度。
+    引用内容：
+        1. finished：打包结束信号
+        2. log_signal：日志信号
+        3. progress_signal：进度信号
+    被引用位置：
+        1.第548行：
+            start_packaging() 中创建并启动线程
+
+PackageGui(QMainWindow)
+    初始化位置：288 - 318
+    作用：主界面类，负责全部用户交互、参数收集、资源配置和打包启动。
+    引用内容：None
+    被引用位置：
+        1.第794行：
+            main() 中实例化窗口
+
+PackageGui._build_ui()
+    初始化位置：318 - 587
+    作用：创建主界面布局与所有控件，包括项目选择、脚本选择、图标选择、资源选择、输出目录选择、打包设置和日志区。
+    引用内容：None
+    被引用位置：
+        1.第286行：
+            __init__() 中自动调用
+
+PackageGui._append_log(message)
+    初始化位置：589 - 597
+    作用：将消息追加到日志文本框，并保持滚动视图接近最新日志位置。
+    引用内容：
+        1. message：追加到日志框的内容
+    被引用位置：
+        1.第529行：
+            handle_log_message() 调用
+        2.第637行：
+            项目目录选择后写日志
+        3.第650行：
+            脚本选择后写日志
+        4.第691行：
+            图标选择后写日志
+        5.第729行：
+            资源添加日志
+        6.第760行：
+            输出目录选择日志
+        7.第773行：
+            打包线程启动日志
+
+PackageGui.handle_progress(value)
+    初始化位置：599 - 602
+    作用：接收后台线程发来的进度值，并更新进度条显示。
+    引用内容：
+        1. value：进度百分比
+    被引用位置：
+        1.第552行：
+            progress_signal 连接此槽函数
+
+PackageGui.handle_log_message(message, level)
+    初始化位置：605 - 607
+    作用：接收后台线程发来的日志信息，并将其追加到界面日志框中。
+    引用内容：
+        1. message：日志文本
+        2. level：日志级别
+    被引用位置：
+        1.第553行：
+            log_signal 连接此槽函数
+
+PackageGui.select_project_dir()
+    初始化位置：609 - 620
+    作用：打开文件夹选择对话框，选择 Python 项目目录，并扫描该目录中的 Python 文件。
+    引用内容：None
+    被引用位置：
+        1.第350行：
+            “选择 Python 项目”按钮触发
+
+PackageGui.populate_file_listbox()
+    初始化位置：622 - 628
+    作用：将扫描到的 Python 文件填充到列表框中，并显示相对路径。
+    引用内容：None
+    被引用位置：
+        1.第633行：
+            选择项目目录后调用
+
+PackageGui.select_python_files()
+    初始化位置：630 - 650
+    作用：允许用户从项目中选择要打包的 Python 文件，并同步勾选到列表框中。
+    引用内容：None
+    被引用位置：
+        1.第367行：
+            “选择要打包的 Python 文件”按钮触发
+
+PackageGui.select_icon_file()
+    初始化位置：652 - 691
+    作用：选择图标文件，并根据平台需要提示默认图标回退策略。
+    引用内容：None
+    被引用位置：
+        1.第398行：
+            “选择图标文件”按钮触发
+
+PackageGui._refresh_resource_lists()
+    初始化位置：693 - 701
+    作用：刷新资源列表区域，更新电脑路径和打包内相对路径两列内容。
+    引用内容：None
+    被引用位置：
+        1.第729行：
+            添加资源成功后调用
+
+PackageGui.add_resource_entry()
+    初始化位置：703 - 738
+    作用：打开资源选择对话框，并弹出确认窗口，要求用户确认资源在打包项目中的目标路径。
+    引用内容：None
+    被引用位置：
+        1.第404行：
+            “添加打包资源”按钮触发
+
+PackageGui.select_output_dir()
+    初始化位置：740 - 748
+    作用：选择打包输出目录，并更新界面显示和日志记录。
+    引用内容：None
+    被引用位置：
+        1.第479行：
+            “选择输出目录”按钮触发
+
+PackageGui.start_packaging()
+    初始化位置：750 - 778
+    作用：检查输入参数，启动后台打包线程，并将打包参数传递给 PackagingWorker。
+    引用内容：None
+    被引用位置：
+        1.第531行：
+            “开始打包”按钮触发
+
+PackageGui.on_packaging_finished(result)
+    初始化位置：780 - 798
+    作用：处理打包完成事件，并在成功后弹出输出目录提示框。
+    引用内容：
+        1. result：打包任务返回的结果对象
+    被引用位置：
+        1.第555行：
+            线程信号 finished 连接此槽函数
+
+PackageGui.open_output_folder()
+    初始化位置：800 - 811
+    作用：根据系统平台打开输出目录，便于用户快速查看生成的文件。
+    引用内容：None
+    被引用位置：
+        1.第705行：
+            成功后点击“打开输出目录”按钮时调用
+
+PackageGui.open_log_file()
+    初始化位置：813 - 821
+    作用：在系统默认方式下打开日志文件，便于查看程序执行日志。
+    引用内容：None
+    被引用位置：
+        1.第536行：
+            查看日志按钮触发
+
+main()
+    初始化位置：823 - 849
+    作用：程序入口，负责初始化 QApplication、加载字体、设置图标并显示主窗口。
+    引用内容：None
+    被引用位置：
+        1.第851行：
+            作为脚本入口执行

@@ -480,3 +480,374 @@
 [2026-08-11 10:06:13][INFO]: 199353 INFO: Building EXE from EXE-00.toc completed successfully.
 [2026-08-11 10:06:13][INFO]: 199361 INFO: Build complete! The results are available in: C:\Users\Administrator\Documents\Output
 [2026-08-11 10:06:13][SUCCESS]: 打包已成功完成，输出目录已生成
+[2026-08-11 12:29:22][INFO]: 资源目录与输出目录已准备就绪
+[2026-08-11 12:29:23][INFO]: GUI 主窗口已创建
+[2026-08-11 12:29:41][INFO]: 已扫描到 1 个 Python 文件
+[2026-08-11 12:29:41][INFO]: 已选择项目目录: C:\Users\Administrator\PycharmProjects\PackPython
+[2026-08-11 12:29:50][INFO]: 已选择打包文件: [WindowsPath('C:/Users/Administrator/PycharmProjects/PackPython/main.py')]
+[2026-08-11 12:30:04][INFO]: 已添加资源: C:\Users\Administrator\PycharmProjects\PackPython\assets\package.ico -> assets/package.ico
+[2026-08-11 12:30:16][INFO]: 已启动后台打包线程
+[2026-08-11 12:30:16][INFO]: 已生成打包命令: C:\Users\Administrator\PycharmProjects\PackPython\.venv\Scripts\python.exe -m PyInstaller --noconfirm --distpath C:\Users\Administrator\PycharmProjects\PackPython\output --workpath C:\Users\Administrator\PycharmProjects\PackPython\output\build --specpath C:\Users\Administrator\PycharmProjects\PackPython\output\spec --windowed --onefile --name my_app --icon C:\Users\Administrator\PycharmProjects\PackPython\assets\package.ico --add-data C:\Users\Administrator\PycharmProjects\PackPython\assets\package.ico;assets/package.ico C:\Users\Administrator\PycharmProjects\PackPython\main.py
+[2026-08-11 12:30:16][INFO]: 开始在项目目录 C:\Users\Administrator\PycharmProjects\PackPython 中执行打包
+[2026-08-11 12:30:17][INFO]: 424 INFO: PyInstaller: 6.22.0, contrib hooks: 2026.6
+[2026-08-11 12:30:17][INFO]: 424 INFO: Python: 3.13.0
+[2026-08-11 12:30:17][INFO]: 480 INFO: Platform: Windows-10-10.0.19045-SP0
+[2026-08-11 12:30:17][INFO]: 480 INFO: Python environment: C:\Users\Administrator\PycharmProjects\PackPython\.venv
+[2026-08-11 12:30:17][INFO]: 482 INFO: wrote C:\Users\Administrator\PycharmProjects\PackPython\output\spec\my_app.spec
+[2026-08-11 12:30:17][INFO]: 493 INFO: Module search paths (PYTHONPATH):
+[2026-08-11 12:30:17][INFO]: ['C:\\Users\\Administrator\\PycharmProjects\\PackPython',
+[2026-08-11 12:30:17][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313\\python313.zip',
+[2026-08-11 12:30:17][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313\\DLLs',
+[2026-08-11 12:30:17][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313\\Lib',
+[2026-08-11 12:30:17][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313',
+[2026-08-11 12:30:17][INFO]:  'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv',
+[2026-08-11 12:30:17][INFO]:  'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages',
+[2026-08-11 12:30:17][INFO]:  'C:\\Users\\Administrator\\PycharmProjects\\PackPython']
+[2026-08-11 12:30:17][INFO]: 1118 INFO: Appending 'datas' from .spec
+[2026-08-11 12:30:17][INFO]: 1119 INFO: checking Analysis
+[2026-08-11 12:30:17][INFO]: 1119 INFO: Building Analysis because Analysis-00.toc is non existent
+[2026-08-11 12:30:17][INFO]: 1119 INFO: Looking for Python shared library...
+[2026-08-11 12:30:17][INFO]: 1119 INFO: Using Python shared library: C:\Users\Administrator\AppData\Local\Programs\Python\Python313\python313.dll
+[2026-08-11 12:30:17][INFO]: 1119 INFO: Running Analysis Analysis-00.toc
+[2026-08-11 12:30:17][INFO]: 1119 INFO: Target bytecode optimization level: 0
+[2026-08-11 12:30:17][INFO]: 1119 INFO: Initializing module dependency graph...
+[2026-08-11 12:30:17][INFO]: 1122 INFO: Initializing module graph hook caches...
+[2026-08-11 12:30:17][INFO]: 1155 INFO: Analyzing modules for base_library.zip ...
+[2026-08-11 12:30:20][INFO]: 3483 INFO: Processing standard module hook 'hook-encodings.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:30:21][INFO]: 4443 INFO: Processing standard module hook 'hook-math.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:30:22][INFO]: 6147 INFO: Processing standard module hook 'hook-pickle.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:30:24][INFO]: 7613 INFO: Processing standard module hook 'hook-heapq.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:30:25][INFO]: 8290 INFO: Caching module dependency graph...
+[2026-08-11 12:30:25][INFO]: 8334 INFO: Analyzing C:\Users\Administrator\PycharmProjects\PackPython\main.py
+[2026-08-11 12:30:25][INFO]: 8405 INFO: Processing standard module hook 'hook-_ctypes.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:30:25][INFO]: 8415 INFO: Processing standard module hook 'hook-PyQt5.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:30:26][INFO]: 9410 INFO: Processing standard module hook 'hook-PyQt5.QtCore.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:30:29][INFO]: 12620 INFO: Processing standard module hook 'hook-PyQt5.QtWidgets.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:30:34][INFO]: 17798 INFO: Processing standard module hook 'hook-PyQt5.QtGui.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:31:09][INFO]: 52360 INFO: Processing module hooks (post-graph stage)...
+[2026-08-11 12:31:09][INFO]: 52366 WARNING: Hidden import "sip" not found!
+[2026-08-11 12:31:09][INFO]: 52418 INFO: Performing binary vs. data reclassification (98 entries)
+[2026-08-11 12:31:09][INFO]: 52508 INFO: Looking for ctypes DLLs
+[2026-08-11 12:31:09][INFO]: 52527 INFO: Analyzing run-time hooks ...
+[2026-08-11 12:31:09][INFO]: 52528 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+[2026-08-11 12:31:09][INFO]: 52532 INFO: Including run-time hook 'pyi_rth_pyqt5.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+[2026-08-11 12:31:09][INFO]: 52535 INFO: Processing pre-find-module-path hook 'hook-_pyi_rth_utils.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
+[2026-08-11 12:31:09][INFO]: 52540 INFO: Processing standard module hook 'hook-_pyi_rth_utils.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:31:09][INFO]: 52545 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+[2026-08-11 12:31:09][INFO]: 52560 INFO: Creating base_library.zip...
+[2026-08-11 12:31:09][INFO]: 52590 INFO: Looking for dynamic libraries
+[2026-08-11 12:31:09][INFO]: 52799 INFO: Extra DLL search directories (AddDllDirectory): ['C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyQt5\\Qt5\\bin']
+[2026-08-11 12:31:09][INFO]: 52799 INFO: Extra DLL search directories (PATH): []
+[2026-08-11 12:31:11][INFO]: 54676 INFO: Warnings written to C:\Users\Administrator\PycharmProjects\PackPython\output\build\my_app\warn-my_app.txt
+[2026-08-11 12:31:11][INFO]: 54707 INFO: Graph cross-reference written to C:\Users\Administrator\PycharmProjects\PackPython\output\build\my_app\xref-my_app.html
+[2026-08-11 12:31:11][INFO]: 54741 INFO: checking PYZ
+[2026-08-11 12:31:11][INFO]: 54741 INFO: Building PYZ because PYZ-00.toc is non existent
+[2026-08-11 12:31:11][INFO]: 54741 INFO: Building PYZ (ZlibArchive) C:\Users\Administrator\PycharmProjects\PackPython\output\build\my_app\PYZ-00.pyz
+[2026-08-11 12:31:11][INFO]: 54927 INFO: Building PYZ (ZlibArchive) C:\Users\Administrator\PycharmProjects\PackPython\output\build\my_app\PYZ-00.pyz completed successfully.
+[2026-08-11 12:31:11][INFO]: 54941 INFO: checking PKG
+[2026-08-11 12:31:11][INFO]: 54941 INFO: Building PKG because PKG-00.toc is non existent
+[2026-08-11 12:31:11][INFO]: 54941 INFO: Building PKG (CArchive) my_app.pkg
+[2026-08-11 12:31:25][INFO]: 68728 INFO: Building PKG (CArchive) my_app.pkg completed successfully.
+[2026-08-11 12:31:25][INFO]: 68733 INFO: Bootloader C:\Users\Administrator\PycharmProjects\PackPython\.venv\Lib\site-packages\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+[2026-08-11 12:31:25][INFO]: 68733 INFO: checking EXE
+[2026-08-11 12:31:25][INFO]: 68734 INFO: Building EXE because EXE-00.toc is non existent
+[2026-08-11 12:31:25][INFO]: 68734 INFO: Building EXE from EXE-00.toc
+[2026-08-11 12:31:25][INFO]: 68737 INFO: Copying bootloader EXE to C:\Users\Administrator\PycharmProjects\PackPython\output\my_app.exe
+[2026-08-11 12:31:25][INFO]: 68754 INFO: Copying icon to EXE
+[2026-08-11 12:31:25][INFO]: 68761 INFO: Copying 0 resources to EXE
+[2026-08-11 12:31:25][INFO]: 68761 INFO: Embedding manifest in EXE
+[2026-08-11 12:31:25][INFO]: 68770 INFO: Appending PKG archive to EXE
+[2026-08-11 12:31:25][INFO]: 68805 INFO: Fixing EXE headers
+[2026-08-11 12:31:26][INFO]: 69449 INFO: Building EXE from EXE-00.toc completed successfully.
+[2026-08-11 12:31:26][INFO]: 69454 INFO: Build complete! The results are available in: C:\Users\Administrator\PycharmProjects\PackPython\output
+[2026-08-11 12:31:26][SUCCESS]: 打包已成功完成，输出目录已生成
+[2026-08-11 12:31:26][INFO]: 已复制资源：C:\Users\Administrator\PycharmProjects\PackPython\assets\package.ico -> C:\Users\Administrator\PycharmProjects\PackPython\output\dist\my_app\assets\package.ico
+[2026-08-11 12:34:30][INFO]: 资源目录与输出目录已准备就绪
+[2026-08-11 12:34:31][INFO]: GUI 主窗口已创建
+[2026-08-11 12:35:13][INFO]: 已添加资源: C:\Users\Administrator\PycharmProjects\PackPython\assets\package.ico -> assets
+[2026-08-11 12:35:26][INFO]: 已扫描到 1 个 Python 文件
+[2026-08-11 12:35:26][INFO]: 已选择项目目录: C:\Users\Administrator\PycharmProjects\PackPython
+[2026-08-11 12:35:28][INFO]: 已选择打包文件: [WindowsPath('C:/Users/Administrator/PycharmProjects/PackPython/main.py')]
+[2026-08-11 12:35:32][INFO]: 已启动后台打包线程
+[2026-08-11 12:35:32][INFO]: 已生成打包命令: C:\Users\Administrator\PycharmProjects\PackPython\.venv\Scripts\python.exe -m PyInstaller --noconfirm --distpath C:\Users\Administrator\PycharmProjects\PackPython\output --workpath C:\Users\Administrator\PycharmProjects\PackPython\output\build --specpath C:\Users\Administrator\PycharmProjects\PackPython\output\spec --windowed --onefile --name my_app --icon C:\Users\Administrator\PycharmProjects\PackPython\assets\package.ico --add-data C:\Users\Administrator\PycharmProjects\PackPython\assets\package.ico;assets C:\Users\Administrator\PycharmProjects\PackPython\main.py
+[2026-08-11 12:35:32][INFO]: 开始在项目目录 C:\Users\Administrator\PycharmProjects\PackPython 中执行打包
+[2026-08-11 12:35:33][INFO]: 279 INFO: PyInstaller: 6.22.0, contrib hooks: 2026.6
+[2026-08-11 12:35:33][INFO]: 279 INFO: Python: 3.13.0
+[2026-08-11 12:35:33][INFO]: 336 INFO: Platform: Windows-10-10.0.19045-SP0
+[2026-08-11 12:35:33][INFO]: 336 INFO: Python environment: C:\Users\Administrator\PycharmProjects\PackPython\.venv
+[2026-08-11 12:35:33][INFO]: 337 INFO: wrote C:\Users\Administrator\PycharmProjects\PackPython\output\spec\my_app.spec
+[2026-08-11 12:35:33][INFO]: 348 INFO: Module search paths (PYTHONPATH):
+[2026-08-11 12:35:33][INFO]: ['C:\\Users\\Administrator\\PycharmProjects\\PackPython',
+[2026-08-11 12:35:33][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313\\python313.zip',
+[2026-08-11 12:35:33][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313\\DLLs',
+[2026-08-11 12:35:33][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313\\Lib',
+[2026-08-11 12:35:33][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313',
+[2026-08-11 12:35:33][INFO]:  'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv',
+[2026-08-11 12:35:33][INFO]:  'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages',
+[2026-08-11 12:35:33][INFO]:  'C:\\Users\\Administrator\\PycharmProjects\\PackPython']
+[2026-08-11 12:35:34][INFO]: 880 INFO: Appending 'datas' from .spec
+[2026-08-11 12:35:34][INFO]: 881 INFO: checking Analysis
+[2026-08-11 12:35:34][INFO]: 885 INFO: Building because _input_datas changed
+[2026-08-11 12:35:34][INFO]: 885 INFO: Looking for Python shared library...
+[2026-08-11 12:35:34][INFO]: 885 INFO: Using Python shared library: C:\Users\Administrator\AppData\Local\Programs\Python\Python313\python313.dll
+[2026-08-11 12:35:34][INFO]: 886 INFO: Running Analysis Analysis-00.toc
+[2026-08-11 12:35:34][INFO]: 886 INFO: Target bytecode optimization level: 0
+[2026-08-11 12:35:34][INFO]: 886 INFO: Initializing module dependency graph...
+[2026-08-11 12:35:34][INFO]: 888 INFO: Initializing module graph hook caches...
+[2026-08-11 12:35:34][INFO]: 910 INFO: Analyzing modules for base_library.zip ...
+[2026-08-11 12:35:36][INFO]: 3030 INFO: Processing standard module hook 'hook-encodings.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:35:36][INFO]: 3707 INFO: Processing standard module hook 'hook-math.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:35:38][INFO]: 5254 INFO: Processing standard module hook 'hook-pickle.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:35:39][INFO]: 6602 INFO: Processing standard module hook 'hook-heapq.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:35:40][INFO]: 7247 INFO: Caching module dependency graph...
+[2026-08-11 12:35:40][INFO]: 7291 INFO: Analyzing C:\Users\Administrator\PycharmProjects\PackPython\main.py
+[2026-08-11 12:35:40][INFO]: 7362 INFO: Processing standard module hook 'hook-_ctypes.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:35:40][INFO]: 7371 INFO: Processing standard module hook 'hook-PyQt5.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:35:41][INFO]: 8324 INFO: Processing standard module hook 'hook-PyQt5.QtCore.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:35:44][INFO]: 11495 INFO: Processing standard module hook 'hook-PyQt5.QtWidgets.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:35:49][INFO]: 16698 INFO: Processing standard module hook 'hook-PyQt5.QtGui.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:36:21][INFO]: 48312 INFO: Processing module hooks (post-graph stage)...
+[2026-08-11 12:36:21][INFO]: 48317 WARNING: Hidden import "sip" not found!
+[2026-08-11 12:36:21][INFO]: 48365 INFO: Performing binary vs. data reclassification (98 entries)
+[2026-08-11 12:36:21][INFO]: 48416 INFO: Looking for ctypes DLLs
+[2026-08-11 12:36:21][INFO]: 48436 INFO: Analyzing run-time hooks ...
+[2026-08-11 12:36:21][INFO]: 48437 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+[2026-08-11 12:36:21][INFO]: 48441 INFO: Including run-time hook 'pyi_rth_pyqt5.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+[2026-08-11 12:36:21][INFO]: 48444 INFO: Processing pre-find-module-path hook 'hook-_pyi_rth_utils.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
+[2026-08-11 12:36:21][INFO]: 48448 INFO: Processing standard module hook 'hook-_pyi_rth_utils.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-11 12:36:21][INFO]: 48454 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+[2026-08-11 12:36:21][INFO]: 48465 INFO: Creating base_library.zip...
+[2026-08-11 12:36:21][INFO]: 48495 INFO: Looking for dynamic libraries
+[2026-08-11 12:36:21][INFO]: 48724 INFO: Extra DLL search directories (AddDllDirectory): ['C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyQt5\\Qt5\\bin']
+[2026-08-11 12:36:21][INFO]: 48724 INFO: Extra DLL search directories (PATH): []
+[2026-08-11 12:36:23][INFO]: 50308 INFO: Warnings written to C:\Users\Administrator\PycharmProjects\PackPython\output\build\my_app\warn-my_app.txt
+[2026-08-11 12:36:23][INFO]: 50327 INFO: Graph cross-reference written to C:\Users\Administrator\PycharmProjects\PackPython\output\build\my_app\xref-my_app.html
+[2026-08-11 12:36:23][INFO]: 50349 INFO: checking PYZ
+[2026-08-11 12:36:23][INFO]: 50374 INFO: checking PKG
+[2026-08-11 12:36:23][INFO]: 50376 INFO: Building because toc changed
+[2026-08-11 12:36:23][INFO]: 50376 INFO: Building PKG (CArchive) my_app.pkg
+[2026-08-11 12:36:35][INFO]: 62034 INFO: Building PKG (CArchive) my_app.pkg completed successfully.
+[2026-08-11 12:36:35][INFO]: 62041 INFO: Bootloader C:\Users\Administrator\PycharmProjects\PackPython\.venv\Lib\site-packages\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+[2026-08-11 12:36:35][INFO]: 62041 INFO: checking EXE
+[2026-08-11 12:36:35][INFO]: 62044 INFO: Building because toc changed
+[2026-08-11 12:36:35][INFO]: 62044 INFO: Building EXE from EXE-00.toc
+[2026-08-11 12:36:35][INFO]: 62051 INFO: Copying bootloader EXE to C:\Users\Administrator\PycharmProjects\PackPython\output\my_app.exe
+[2026-08-11 12:36:35][INFO]: 62066 INFO: Copying icon to EXE
+[2026-08-11 12:36:35][INFO]: 62075 INFO: Copying 0 resources to EXE
+[2026-08-11 12:36:35][INFO]: 62075 INFO: Embedding manifest in EXE
+[2026-08-11 12:36:35][INFO]: 62082 INFO: Appending PKG archive to EXE
+[2026-08-11 12:36:35][INFO]: 62130 INFO: Fixing EXE headers
+[2026-08-11 12:36:35][INFO]: 62465 INFO: Building EXE from EXE-00.toc completed successfully.
+[2026-08-11 12:36:35][INFO]: 62471 INFO: Build complete! The results are available in: C:\Users\Administrator\PycharmProjects\PackPython\output
+[2026-08-11 12:36:35][SUCCESS]: 打包已成功完成，输出目录已生成
+[2026-08-11 12:36:35][INFO]: 已复制资源：C:\Users\Administrator\PycharmProjects\PackPython\assets\package.ico -> C:\Users\Administrator\PycharmProjects\PackPython\output\dist\my_app\assets
+[2026-08-12 16:56:40][INFO]: 资源目录与输出目录已准备就绪
+[2026-08-12 16:56:41][INFO]: GUI 主窗口已创建
+[2026-08-13 13:36:15][INFO]: 资源目录与输出目录已准备就绪
+[2026-08-13 13:57:44][INFO]: 资源目录与输出目录已准备就绪
+[2026-08-13 13:57:45][INFO]: GUI 主窗口已创建
+[2026-08-13 13:58:06][INFO]: 已扫描到 1 个 Python 文件
+[2026-08-13 13:58:06][INFO]: 已读取 .package 配置文件: C:\Users\Administrator\PycharmProjects\PackPython\.package
+[2026-08-13 13:58:06][INFO]: 已根据 .package 中的 path 设定项目目录: C:\Users\Administrator\PycharmProjects\PackPython
+[2026-08-13 13:58:06][INFO]: 已扫描到 1 个 Python 文件
+[2026-08-13 13:58:06][INFO]: 已从 .package 自动选择打包文件: ['C:\\Users\\Administrator\\PycharmProjects\\PackPython\\main.py']
+[2026-08-13 13:58:06][INFO]: 已从 .package 自动添加资源: [('C:\\Users\\Administrator\\PycharmProjects\\PackPython\\assets\\package.ico', 'assets')]
+[2026-08-13 13:58:06][INFO]: 已根据 .package 中的 ico_path 配置图标: C:\Users\Administrator\PycharmProjects\PackPython\assets\package.ico
+[2026-08-13 13:58:06][INFO]: 已根据 .package 中的 setting 参数更新打包设置: 1,1,1
+[2026-08-13 13:58:06][INFO]: 已选择项目目录: C:\Users\Administrator\PycharmProjects\PackPython
+[2026-08-13 14:30:46][INFO]: 已启动后台打包线程
+[2026-08-13 14:30:46][INFO]: 已生成打包命令: C:\Users\Administrator\PycharmProjects\PackPython\.venv\Scripts\python.exe -m PyInstaller --noconfirm --distpath D:\output --workpath D:\output\build --specpath D:\output\spec --log-level WARN --noupx --noarchive --clean --windowed --onefile --name my_app --icon C:\Users\Administrator\PycharmProjects\PackPython\assets\package.ico --add-data C:\Users\Administrator\PycharmProjects\PackPython\assets\package.ico;assets C:\Users\Administrator\PycharmProjects\PackPython\main.py
+[2026-08-13 14:30:46][INFO]: 开始在项目目录 C:\Users\Administrator\PycharmProjects\PackPython 中执行打包
+[2026-08-13 14:30:47][INFO]: usage: pyinstaller [-h] [-v] [-D] [-F] [--specpath DIR] [-n NAME]
+[2026-08-13 14:30:47][INFO]:                    [--contents-directory CONTENTS_DIRECTORY]
+[2026-08-13 14:30:47][INFO]:                    [--add-data SOURCE:DEST] [--add-binary SOURCE:DEST]
+[2026-08-13 14:30:47][INFO]:                    [-p DIR] [--hidden-import MODULENAME]
+[2026-08-13 14:30:47][INFO]:                    [--collect-submodules MODULENAME]
+[2026-08-13 14:30:47][INFO]:                    [--collect-data MODULENAME] [--collect-binaries MODULENAME]
+[2026-08-13 14:30:47][INFO]:                    [--collect-all MODULENAME] [--copy-metadata PACKAGENAME]
+[2026-08-13 14:30:47][INFO]:                    [--recursive-copy-metadata PACKAGENAME]
+[2026-08-13 14:30:47][INFO]:                    [--additional-hooks-dir HOOKSPATH]
+[2026-08-13 14:30:47][INFO]:                    [--runtime-hook RUNTIME_HOOKS] [--exclude-module EXCLUDES]
+[2026-08-13 14:30:47][INFO]:                    [--splash IMAGE_FILE]
+[2026-08-13 14:30:47][INFO]:                    [--splash-center {active,primary,default,virtual}]
+[2026-08-13 14:30:47][INFO]:                    [-d {all,imports,bootloader,noarchive}] [--optimize LEVEL]
+[2026-08-13 14:30:47][INFO]:                    [--python-option PYTHON_OPTION] [-s] [--noupx]
+[2026-08-13 14:30:47][INFO]:                    [--upx-exclude FILE] [-c] [-w]
+[2026-08-13 14:30:47][INFO]:                    [--hide-console {hide-early,hide-late,minimize-early,minimize-late}]
+[2026-08-13 14:30:47][INFO]:                    [-i <FILE.ico or FILE.exe,ID or FILE.icns or Image or "NONE">]
+[2026-08-13 14:30:47][INFO]:                    [--disable-windowed-traceback] [--version-file FILE]
+[2026-08-13 14:30:47][INFO]:                    [--manifest <FILE or XML>] [-m <FILE or XML>] [-r RESOURCE]
+[2026-08-13 14:30:47][INFO]:                    [--uac-admin] [--uac-uiaccess] [--argv-emulation]
+[2026-08-13 14:30:47][INFO]:                    [--osx-bundle-identifier BUNDLE_IDENTIFIER]
+[2026-08-13 14:30:47][INFO]:                    [--target-architecture ARCH] [--codesign-identity IDENTITY]
+[2026-08-13 14:30:47][INFO]:                    [--osx-entitlements-file FILENAME] [--runtime-tmpdir PATH]
+[2026-08-13 14:30:47][INFO]:                    [--bootloader-ignore-signals] [--distpath DIR]
+[2026-08-13 14:30:47][INFO]:                    [--workpath WORKPATH] [-y] [--upx-dir UPX_DIR] [--clean]
+[2026-08-13 14:30:47][INFO]:                    [--log-level LEVEL]
+[2026-08-13 14:30:47][INFO]:                    scriptname [scriptname ...]
+[2026-08-13 14:30:47][INFO]: pyinstaller: error: unrecognized arguments: --noarchive
+[2026-08-13 14:30:47][ERROR]: 打包失败: usage: pyinstaller [-h] [-v] [-D] [-F] [--specpath DIR] [-n NAME]
+                   [--contents-directory CONTENTS_DIRECTORY]
+                   [--add-data SOURCE:DEST] [--add-binary SOURCE:DEST]
+                   [-p DIR] [--hidden-import MODULENAME]
+                   [--collect-submodules MODULENAME]
+                   [--collect-data MODULENAME] [--collect-binaries MODULENAME]
+                   [--collect-all MODULENAME] [--copy-metadata PACKAGENAME]
+                   [--recursive-copy-metadata PACKAGENAME]
+                   [--additional-hooks-dir HOOKSPATH]
+                   [--runtime-hook RUNTIME_HOOKS] [--exclude-module EXCLUDES]
+                   [--splash IMAGE_FILE]
+                   [--splash-center {active,primary,default,virtual}]
+                   [-d {all,imports,bootloader,noarchive}] [--optimize LEVEL]
+                   [--python-option PYTHON_OPTION] [-s] [--noupx]
+                   [--upx-exclude FILE] [-c] [-w]
+                   [--hide-console {hide-early,hide-late,minimize-early,minimize-late}]
+                   [-i <FILE.ico or FILE.exe,ID or FILE.icns or Image or "NONE">]
+                   [--disable-windowed-traceback] [--version-file FILE]
+                   [--manifest <FILE or XML>] [-m <FILE or XML>] [-r RESOURCE]
+                   [--uac-admin] [--uac-uiaccess] [--argv-emulation]
+                   [--osx-bundle-identifier BUNDLE_IDENTIFIER]
+                   [--target-architecture ARCH] [--codesign-identity IDENTITY]
+                   [--osx-entitlements-file FILENAME] [--runtime-tmpdir PATH]
+                   [--bootloader-ignore-signals] [--distpath DIR]
+                   [--workpath WORKPATH] [-y] [--upx-dir UPX_DIR] [--clean]
+                   [--log-level LEVEL]
+                   scriptname [scriptname ...]
+pyinstaller: error: unrecognized arguments: --noarchive
+[2026-08-14 08:27:11][INFO]: 资源目录与输出目录已准备就绪
+[2026-08-14 08:27:12][INFO]: GUI 主窗口已创建
+[2026-08-14 08:27:18][INFO]: 已扫描到 1 个 Python 文件
+[2026-08-14 08:27:18][INFO]: 未发现项目配置文件 .package，路径为: C:\Users\Administrator\PycharmProjects\Kill_WPS\.package
+[2026-08-14 08:27:18][INFO]: 已选择项目目录: C:\Users\Administrator\PycharmProjects\Kill_WPS
+[2026-08-14 08:27:21][INFO]: 已选择打包文件: [WindowsPath('C:/Users/Administrator/PycharmProjects/Kill_WPS/main.py')]
+[2026-08-14 08:27:31][INFO]: 已启动后台打包线程
+[2026-08-14 08:27:31][INFO]: 已生成打包命令: C:\Users\Administrator\PycharmProjects\PackPython\.venv\Scripts\python.exe -m PyInstaller --noconfirm --distpath D:\output --workpath D:\output\build --specpath D:\output\spec --onedir --name kill_wps --icon C:\Users\Administrator\PycharmProjects\PackPython\assets\package.ico C:\Users\Administrator\PycharmProjects\Kill_WPS\main.py
+[2026-08-14 08:27:31][INFO]: 开始在项目目录 C:\Users\Administrator\PycharmProjects\Kill_WPS 中执行打包
+[2026-08-14 08:27:32][INFO]: 318 INFO: PyInstaller: 6.22.0, contrib hooks: 2026.6
+[2026-08-14 08:27:32][INFO]: 318 INFO: Python: 3.13.0
+[2026-08-14 08:27:32][INFO]: 373 INFO: Platform: Windows-10-10.0.19045-SP0
+[2026-08-14 08:27:32][INFO]: 373 INFO: Python environment: C:\Users\Administrator\PycharmProjects\PackPython\.venv
+[2026-08-14 08:27:32][INFO]: 375 INFO: wrote D:\output\spec\kill_wps.spec
+[2026-08-14 08:27:32][INFO]: 385 INFO: Module search paths (PYTHONPATH):
+[2026-08-14 08:27:32][INFO]: ['C:\\Users\\Administrator\\PycharmProjects\\Kill_WPS',
+[2026-08-14 08:27:32][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313\\python313.zip',
+[2026-08-14 08:27:32][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313\\DLLs',
+[2026-08-14 08:27:32][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313\\Lib',
+[2026-08-14 08:27:32][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313',
+[2026-08-14 08:27:32][INFO]:  'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv',
+[2026-08-14 08:27:32][INFO]:  'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages',
+[2026-08-14 08:27:32][INFO]:  'C:\\Users\\Administrator\\PycharmProjects\\Kill_WPS']
+[2026-08-14 08:27:32][INFO]: 892 INFO: checking Analysis
+[2026-08-14 08:27:32][INFO]: 892 INFO: Building Analysis because Analysis-00.toc is non existent
+[2026-08-14 08:27:32][INFO]: 892 INFO: Looking for Python shared library...
+[2026-08-14 08:27:32][INFO]: 892 INFO: Using Python shared library: C:\Users\Administrator\AppData\Local\Programs\Python\Python313\python313.dll
+[2026-08-14 08:27:32][INFO]: 892 INFO: Running Analysis Analysis-00.toc
+[2026-08-14 08:27:32][INFO]: 892 INFO: Target bytecode optimization level: 0
+[2026-08-14 08:27:32][INFO]: 892 INFO: Initializing module dependency graph...
+[2026-08-14 08:27:32][INFO]: 895 INFO: Initializing module graph hook caches...
+[2026-08-14 08:27:32][INFO]: 918 INFO: Analyzing modules for base_library.zip ...
+[2026-08-14 08:27:34][INFO]: 2693 INFO: Processing standard module hook 'hook-heapq.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-14 08:27:34][INFO]: 2823 INFO: Processing standard module hook 'hook-encodings.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-14 08:27:35][INFO]: 3705 INFO: Processing standard module hook 'hook-math.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-14 08:27:37][INFO]: 5448 INFO: Processing standard module hook 'hook-pickle.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-14 08:27:39][INFO]: 7304 INFO: Caching module dependency graph...
+[2026-08-14 08:27:39][INFO]: 7346 INFO: Analyzing C:\Users\Administrator\PycharmProjects\Kill_WPS\main.py
+[2026-08-14 08:27:39][INFO]: 7375 INFO: Processing standard module hook 'hook-_ctypes.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+[2026-08-14 08:27:39][INFO]: 7383 INFO: Processing module hooks (post-graph stage)...
+[2026-08-14 08:27:39][INFO]: 7388 INFO: Performing binary vs. data reclassification (1 entries)
+[2026-08-14 08:27:39][INFO]: 7391 INFO: Looking for ctypes DLLs
+[2026-08-14 08:27:39][INFO]: 7398 INFO: Analyzing run-time hooks ...
+[2026-08-14 08:27:39][INFO]: 7399 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+[2026-08-14 08:27:39][INFO]: 7407 INFO: Creating base_library.zip...
+[2026-08-14 08:27:39][INFO]: 7436 INFO: Looking for dynamic libraries
+[2026-08-14 08:27:39][INFO]: 7637 INFO: Extra DLL search directories (AddDllDirectory): []
+[2026-08-14 08:27:39][INFO]: 7637 INFO: Extra DLL search directories (PATH): []
+[2026-08-14 08:27:39][INFO]: 8102 INFO: Warnings written to D:\output\build\kill_wps\warn-kill_wps.txt
+[2026-08-14 08:27:39][INFO]: 8121 INFO: Graph cross-reference written to D:\output\build\kill_wps\xref-kill_wps.html
+[2026-08-14 08:27:39][INFO]: 8145 INFO: checking PYZ
+[2026-08-14 08:27:39][INFO]: 8145 INFO: Building PYZ because PYZ-00.toc is non existent
+[2026-08-14 08:27:39][INFO]: 8145 INFO: Building PYZ (ZlibArchive) D:\output\build\kill_wps\PYZ-00.pyz
+[2026-08-14 08:27:40][INFO]: 8304 INFO: Building PYZ (ZlibArchive) D:\output\build\kill_wps\PYZ-00.pyz completed successfully.
+[2026-08-14 08:27:40][INFO]: 8312 INFO: checking PKG
+[2026-08-14 08:27:40][INFO]: 8312 INFO: Building PKG because PKG-00.toc is non existent
+[2026-08-14 08:27:40][INFO]: 8312 INFO: Building PKG (CArchive) kill_wps.pkg
+[2026-08-14 08:27:40][INFO]: 8331 INFO: Building PKG (CArchive) kill_wps.pkg completed successfully.
+[2026-08-14 08:27:40][INFO]: 8332 INFO: Bootloader C:\Users\Administrator\PycharmProjects\PackPython\.venv\Lib\site-packages\PyInstaller\bootloader\Windows-64bit-intel\run.exe
+[2026-08-14 08:27:40][INFO]: 8332 INFO: checking EXE
+[2026-08-14 08:27:40][INFO]: 8332 INFO: Building EXE because EXE-00.toc is non existent
+[2026-08-14 08:27:40][INFO]: 8332 INFO: Building EXE from EXE-00.toc
+[2026-08-14 08:27:40][INFO]: 8333 INFO: Copying bootloader EXE to D:\output\build\kill_wps\kill_wps.exe
+[2026-08-14 08:27:40][INFO]: 8341 INFO: Copying icon to EXE
+[2026-08-14 08:27:40][INFO]: 8346 INFO: Copying 0 resources to EXE
+[2026-08-14 08:27:40][INFO]: 8346 INFO: Embedding manifest in EXE
+[2026-08-14 08:27:40][INFO]: 8351 INFO: Appending PKG archive to EXE
+[2026-08-14 08:27:40][INFO]: 8354 INFO: Fixing EXE headers
+[2026-08-14 08:27:40][INFO]: 8423 INFO: Building EXE from EXE-00.toc completed successfully.
+[2026-08-14 08:27:40][INFO]: 8425 INFO: checking COLLECT
+[2026-08-14 08:27:40][INFO]: 8426 INFO: Building COLLECT because COLLECT-00.toc is non existent
+[2026-08-14 08:27:40][INFO]: 8426 INFO: Building COLLECT COLLECT-00.toc
+[2026-08-14 08:27:40][INFO]: 8578 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+[2026-08-14 08:27:40][INFO]: 8580 INFO: Build complete! The results are available in: D:\output
+[2026-08-14 08:27:40][SUCCESS]: 打包已成功完成，输出目录已生成
+[2026-08-14 08:27:50][INFO]: 已启动后台打包线程
+[2026-08-14 08:27:50][INFO]: 已生成打包命令: C:\Users\Administrator\PycharmProjects\PackPython\.venv\Scripts\python.exe -m PyInstaller --noconfirm --distpath D:\output --workpath D:\output\build --specpath D:\output\spec --onefile --name kill_wps --icon C:\Users\Administrator\PycharmProjects\PackPython\assets\package.ico C:\Users\Administrator\PycharmProjects\Kill_WPS\main.py
+[2026-08-14 08:27:50][INFO]: 开始在项目目录 C:\Users\Administrator\PycharmProjects\Kill_WPS 中执行打包
+[2026-08-14 08:27:51][INFO]: 264 INFO: PyInstaller: 6.22.0, contrib hooks: 2026.6
+[2026-08-14 08:27:51][INFO]: 264 INFO: Python: 3.13.0
+[2026-08-14 08:27:51][INFO]: 321 INFO: Platform: Windows-10-10.0.19045-SP0
+[2026-08-14 08:27:51][INFO]: 321 INFO: Python environment: C:\Users\Administrator\PycharmProjects\PackPython\.venv
+[2026-08-14 08:27:51][INFO]: 323 INFO: wrote D:\output\spec\kill_wps.spec
+[2026-08-14 08:27:51][INFO]: 332 INFO: Module search paths (PYTHONPATH):
+[2026-08-14 08:27:51][INFO]: ['C:\\Users\\Administrator\\PycharmProjects\\Kill_WPS',
+[2026-08-14 08:27:51][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313\\python313.zip',
+[2026-08-14 08:27:51][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313\\DLLs',
+[2026-08-14 08:27:51][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313\\Lib',
+[2026-08-14 08:27:51][INFO]:  'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python313',
+[2026-08-14 08:27:51][INFO]:  'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv',
+[2026-08-14 08:27:51][INFO]:  'C:\\Users\\Administrator\\PycharmProjects\\PackPython\\.venv\\Lib\\site-packages',
+[2026-08-14 08:27:51][INFO]:  'C:\\Users\\Administrator\\PycharmProjects\\Kill_WPS']
+[2026-08-14 08:27:52][INFO]: 864 INFO: checking Analysis
+[2026-08-14 08:27:52][INFO]: 921 INFO: checking PYZ
+[2026-08-14 08:27:52][INFO]: 941 INFO: checking PKG
+[2026-08-14 08:27:52][INFO]: 942 INFO: Building because toc changed
+[2026-08-14 08:27:52][INFO]: 942 INFO: Building PKG (CArchive) kill_wps.pkg
+[2026-08-14 08:27:54][INFO]: 2915 INFO: Building PKG (CArchive) kill_wps.pkg completed successfully.
+[2026-08-14 08:27:54][INFO]: 2917 INFO: Bootloader C:\Users\Administrator\PycharmProjects\PackPython\.venv\Lib\site-packages\PyInstaller\bootloader\Windows-64bit-intel\run.exe
+[2026-08-14 08:27:54][INFO]: 2917 INFO: checking EXE
+[2026-08-14 08:27:54][INFO]: 2918 INFO: Rebuilding EXE-00.toc because kill_wps.exe missing
+[2026-08-14 08:27:54][INFO]: 2918 INFO: Building EXE from EXE-00.toc
+[2026-08-14 08:27:54][INFO]: 2919 INFO: Copying bootloader EXE to D:\output\kill_wps.exe
+[2026-08-14 08:27:54][INFO]: 2925 INFO: Copying icon to EXE
+[2026-08-14 08:27:54][INFO]: 2930 INFO: Copying 0 resources to EXE
+[2026-08-14 08:27:54][INFO]: 2930 INFO: Embedding manifest in EXE
+[2026-08-14 08:27:54][INFO]: 2934 INFO: Appending PKG archive to EXE
+[2026-08-14 08:27:54][INFO]: 2942 INFO: Fixing EXE headers
+[2026-08-14 08:27:54][INFO]: 3046 INFO: Building EXE from EXE-00.toc completed successfully.
+[2026-08-14 08:27:54][INFO]: 3048 INFO: Build complete! The results are available in: D:\output
+[2026-08-14 08:27:54][SUCCESS]: 打包已成功完成，输出目录已生成
+[2026-08-14 08:38:11][INFO]: 资源目录与输出目录已准备就绪
+[2026-08-14 08:38:11][INFO]: GUI 主窗口已创建
+[2026-08-14 08:39:36][INFO]: 资源目录与输出目录已准备就绪
+[2026-08-14 08:39:37][INFO]: GUI 主窗口已创建
+[2026-08-14 08:39:49][INFO]: 已扫描到 1 个 Python 文件
+[2026-08-14 08:39:49][INFO]: 未发现项目配置文件 .package，路径为: C:\Users\Administrator\PycharmProjects\Kill_WPS\.package
+[2026-08-14 08:39:49][INFO]: 已选择项目目录: C:\Users\Administrator\PycharmProjects\Kill_WPS
+[2026-08-14 08:39:53][INFO]: 已选择打包文件: [WindowsPath('C:/Users/Administrator/PycharmProjects/Kill_WPS/main.py')]
+[2026-08-14 08:40:09][INFO]: 已启动后台打包线程
+[2026-08-14 08:40:09][INFO]: 已生成打包命令: C:\Users\Administrator\PycharmProjects\PackPython\.venv\Scripts\python.exe -m PyInstaller --noconfirm --distpath D:\output --workpath D:\output\build --specpath D:\output\spec --log-level WARN --noupx --clean --optimize 2 --onefile --name Kill_WPS --icon C:\Users\Administrator\PycharmProjects\PackPython\assets\package.ico C:\Users\Administrator\PycharmProjects\Kill_WPS\main.py
+[2026-08-14 08:40:09][INFO]: 开始在项目目录 C:\Users\Administrator\PycharmProjects\Kill_WPS 中执行打包
+[2026-08-14 08:40:09][INFO]: 279 INFO: PyInstaller: 6.22.0, contrib hooks: 2026.6
+[2026-08-14 08:40:09][INFO]: 279 INFO: Python: 3.13.0
+[2026-08-14 08:40:09][INFO]: 337 INFO: Platform: Windows-10-10.0.19045-SP0
+[2026-08-14 08:40:09][INFO]: 337 INFO: Python environment: C:\Users\Administrator\PycharmProjects\PackPython\.venv
+[2026-08-14 08:40:09][INFO]: 338 INFO: wrote D:\output\spec\Kill_WPS.spec
+[2026-08-14 08:40:20][SUCCESS]: 打包已成功完成，输出目录已生成
+[2026-08-14 08:40:42][INFO]: 已启动后台打包线程
+[2026-08-14 08:40:42][INFO]: 已生成打包命令: C:\Users\Administrator\PycharmProjects\PackPython\.venv\Scripts\python.exe -m PyInstaller --noconfirm --distpath D:\output --workpath D:\output\build --specpath D:\output\spec --log-level WARN --noupx --clean --optimize 2 --onefile --name Kill_WPS --icon C:\Users\Administrator\PycharmProjects\PackPython\assets\package.ico C:\Users\Administrator\PycharmProjects\Kill_WPS\main.py
+[2026-08-14 08:40:42][INFO]: 开始在项目目录 C:\Users\Administrator\PycharmProjects\Kill_WPS 中执行打包
+[2026-08-14 08:40:43][INFO]: 268 INFO: PyInstaller: 6.22.0, contrib hooks: 2026.6
+[2026-08-14 08:40:43][INFO]: 269 INFO: Python: 3.13.0
+[2026-08-14 08:40:43][INFO]: 323 INFO: Platform: Windows-10-10.0.19045-SP0
+[2026-08-14 08:40:43][INFO]: 323 INFO: Python environment: C:\Users\Administrator\PycharmProjects\PackPython\.venv
+[2026-08-14 08:40:43][INFO]: 326 INFO: wrote D:\output\spec\Kill_WPS.spec
+[2026-08-14 08:40:54][SUCCESS]: 打包已成功完成，输出目录已生成

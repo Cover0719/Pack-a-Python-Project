@@ -1,0 +1,21 @@
+# .package 示例文件
+# 所有 # 后面的内容都会被忽略
+# 空行会被忽略
+# 参数格式：参数名=内容
+# 其中 path 为项目绝对路径
+path=C:\Users\Administrator\PycharmProjects\PackPython
+
+# pack_file 用于存储所有要被打包的 Python 文件名，多个文件用分号 ; 分隔
+pack_file=main.py;app\ui.py;app\main.py
+
+# add_file 用于记录需要添加到打包资源中的文件路径。
+# 这里的路径是项目内相对路径，表示在打包后项目中的位置；
+# 例如 /assets/package.ico 表示在打包项目中位于 /assets 文件夹下的 package.ico
+add_file=/assets/package.ico;/assets/logo.png
+
+# ico_path 用于设置打包文件的 ico 图标路径，仍使用项目内相对路径格式
+ico_path=/assets/package.ico
+
+# setting 参数格式为：生成单文件,加快打包,隐藏命令行
+# 例如 1,1,1 表示：勾选生成单文件、勾选加快打包、勾选隐藏命令行
+setting=1,1,1
