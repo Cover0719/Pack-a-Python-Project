@@ -14,5 +14,9 @@
    - `python main.py`
 
 ## 输出说明
-- 打包结果默认输出到 `output` 目录。
+- 打包结果默认输出到 `D:\output` 目录。
 - 你也可以修改脚本中的 `OUTPUT_PATH` 常量。
+
+## 便捷使用
+- 可以运行release中的打包好的实例，也可以运行main.py
+另外，可以搭配.package文件便捷打包，详见.package.example文件

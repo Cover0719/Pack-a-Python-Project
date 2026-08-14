@@ -107,12 +107,6 @@
 [2026-08-10 17:28:22][DEBUG]: 83795 INFO: Build complete! The results are available in: C:\Users\ADMINI~1\AppData\Local\Temp\tmpa8i7c242
 [2026-08-10 17:28:22][SUCCESS]: [2026-08-10 17:28:22][SUCCESS]: test_main 打包成功
 [2026-08-10 17:28:22][SUCCESS]: [2026-08-10 17:28:22][SUCCESS]: 所有打包任务完成，输出目录：C:\Users\ADMINI~1\AppData\Local\Temp\tmpa8i7c242\test_main
-<<<<<<< HEAD
-[2026-08-10 17:42:39][INFO]: 资源目录与输出目录已准备就绪
-[2026-08-10 17:42:39][INFO]: GUI 主窗口已创建
-[2026-08-10 17:42:54][INFO]: 已扫描到 3 个 Python 文件
-=======
->>>>>>> origin/pull
 [2026-08-11 08:10:21][INFO]: 资源目录与输出目录已准备就绪
 [2026-08-11 08:10:22][INFO]: GUI 主窗口已创建
 [2026-08-11 08:10:30][INFO]: 已扫描到 1 个 Python 文件
